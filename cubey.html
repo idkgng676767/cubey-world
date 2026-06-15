@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cubey World</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { overflow: hidden; background: #6BB3E0; }
+canvas { display: block; }
+#hud {
+  position: fixed; top: 20px; left: 20px;
+  color: #fff; font-family: monospace;
+  font-size: 18px; text-shadow: 2px 2px 4px #000;
+  pointer-events: none; z-index: 10;
+}
+#hud .speed { font-size: 40px; font-weight: bold; }
+#hud .label { font-size: 12px; opacity: 0.7; }
+#hud .info { font-size: 11px; margin-top: 6px; opacity: 0.5; }
+#controls {
+  position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+  color: #fff; font-family: monospace; font-size: 12px;
+  text-shadow: 1px 1px 3px #000;
+  pointer-events: none; z-index: 10; opacity: 0.5;
+}
+#minimap {
+  position: fixed; bottom: 20px; right: 20px;
+  width: 160px; height: 160px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 4px; z-index: 10; pointer-events: none;
+}
+#hint {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  color: #fff; font-family: monospace; font-size: 15px;
+  text-shadow: 2px 2px 4px #000; pointer-events: none;
+  z-index: 10; opacity: 0.35; transition: opacity 2s;
+}
+</style>
+</head>
+<body>
+<div id="hud">
+  <div class="speed" id="spd">0</div>
+  <div class="label">KM/H</div>
+  <div class="info" id="info">loading...</div>
+</div>
+<div id="controls">W/S drive | A/D steer | SPACE brake | R reset | Mouse drag look</div>
+<canvas id="minimap"></canvas>
+<div id="hint">Click &amp; drag to look, scroll to zoom</div>
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════
+// VERIFY THREE LOADED
+// ═══════════════════════════════════════════════════════
+console.log('THREE:', THREE.REVISION);
+
+// ═══════════════════════════════════════════════════════
+// RENDERER
+// ═══════════════════════════════════════════════════════
+const renderer = new THREE.WebGLRenderer({ antialias: false });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(1);
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x6BB3E0);
+
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1500);
+camera.position.set(0, 50, 80);
+camera.lookAt(0, 0, 0);
+
+// ═══════════════════════════════════════════════════════
+// LIGHTING
+// ═══════════════════════════════════════════════════════
+scene.add(new THREE.AmbientLight(0x99aabb, 1.0));
+
+const sun = new THREE.DirectionalLight(0xffeedd, 1.5);
+sun.position.set(300, 400, 200);
+scene.add(sun);
+
+scene.add(new THREE.HemisphereLight(0x88bbff, 0x556644, 0.5));
+
+// ═══════════════════════════════════════════════════════
+// NOISE
+// ═══════════════════════════════════════════════════════
+function hash(n) {
+  let x = Math.sin(n) * 43758.5453;
+  return x - Math.floor(x);
+}
+function noise2D(x, y) {
+  const xi = Math.floor(x), yi = Math.floor(y);
+  const xf = x - xi, yf = y - yi;
+  const u = xf * xf * (3 - 2 * xf);
+  const v = yf * yf * (3 - 2 * yf);
+  const a = hash(xi + yi * 157);
+  const b = hash(xi + 1 + yi * 157);
+  const c = hash(xi + (yi + 1) * 157);
+  const d = hash(xi + 1 + (yi + 1) * 157);
+  return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
+}
+function fbm(x, y) {
+  let v = 0, a = 1, f = 1;
+  for (let i = 0; i < 4; i++) { v += noise2D(x * f, y * f) * a; a *= 0.5; f *= 2; }
+  return v;
+}
+
+// ═══════════════════════════════════════════════════════
+// TERRAIN HEIGHT
+// ═══════════════════════════════════════════════════════
+function terrainH(x, z) {
+  let h = fbm(x * 0.001, z * 0.001) * 25 + 5;
+  h += fbm(x * 0.004, z * 0.004) * 5;
+  const d = Math.sqrt(x * x + z * z);
+  if (d < 600) h *= d / 600;
+  return Math.max(0, h);
+}
+
+// ═══════════════════════════════════════════════════════
+// TERRAIN MESH
+// ═══════════════════════════════════════════════════════
+const TS = 4000;
+const TSEG = 180;
+
+{
+  const geo = new THREE.PlaneGeometry(TS, TS, TSEG, TSEG);
+  geo.rotateX(-Math.PI / 2);
+  const pos = geo.attributes.position;
+  const cols = new Float32Array(pos.count * 3);
+
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i), z = pos.getZ(i);
+    const h = terrainH(x, z);
+    pos.setY(i, h);
+    const t = Math.max(0, Math.min(1, (h + 10) / 45));
+    cols[i*3]   = 0.22 + t * 0.20;
+    cols[i*3+1] = 0.30 + t * 0.28;
+    cols[i*3+2] = 0.18 + t * 0.12;
+  }
+  geo.setAttribute('color', new THREE.BufferAttribute(cols, 3));
+  geo.computeVertexNormals();
+
+  const mesh = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ vertexColors: true, flatShading: true }));
+  mesh.receiveShadow = true;
+  scene.add(mesh);
+}
+
+// ═══════════════════════════════════════════════════════
+// ROAD SYSTEM
+// ═══════════════════════════════════════════════════════
+const roads = [];
+const rSegs = [];
+
+function roadSurfH(x, z) { return terrainH(x, z) + 0.2; }
+
+function buildRoadStrip(pts, width, color) {
+  if (pts.length < 2) return;
+  const hw = width / 2;
+  const v = [];
+  const idx = [];
+
+  for (let i = 0; i < pts.length; i++) {
+    const p = pts[i];
+    const h = roadSurfH(p.x, p.z);
+
+    let dx, dz;
+    if (i < pts.length - 1) {
+      dx = pts[i+1].x - p.x;
+      dz = pts[i+1].z - p.z;
+    } else {
+      dx = p.x - pts[i-1].x;
+      dz = p.z - pts[i-1].z;
+    }
+    const len = Math.sqrt(dx*dx + dz*dz) || 1;
+    const nx = -dz / len * hw;
+    const nz = dx / len * hw;
+
+    v.push(p.x + nx, h, p.z + nz);
+    v.push(p.x - nx, h, p.z - nz);
+
+    if (i > 0) {
+      const vi = i * 2;
+      idx.push(vi-2, vi, vi-1);
+      idx.push(vi-1, vi, vi+1);
+    }
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(v, 3));
+  geo.setIndex(idx);
+  geo.computeVertexNormals();
+
+  const mat = new THREE.MeshLambertMaterial({ color, flatShading: true });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.receiveShadow = true;
+  scene.add(mesh);
+}
+
+function buildDashes(pts, color) {
+  if (pts.length < 2) return;
+  const geo = new THREE.PlaneGeometry(0.2, 1.0);
+  const mat = new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide, depthWrite: false });
+
+  for (let i = 0; i < pts.length - 1; i += 5) {
+    const p = pts[i];
+    const pn = pts[Math.min(i + 1, pts.length - 1)];
+    const m = new THREE.Mesh(geo, mat);
+    m.position.set(p.x, roadSurfH(p.x, p.z) + 0.02, p.z);
+    m.rotation.x = -Math.PI / 2;
+    m.rotation.z = Math.atan2(pn.x - p.x, pn.z - p.z);
+    scene.add(m);
+  }
+}
+
+function genStraight(x1, z1, x2, z2) {
+  return [{x: x1, z: z1}, {x: x2, z: z2}];
+}
+
+function genCurve(x1, z1, x2, z2, curve) {
+  const n = Math.max(10, Math.floor(Math.sqrt((x2-x1)**2 + (z2-z1)**2) / 25));
+  const ox = ((x1 * 31 + z2 * 17) % 100 / 100 - 0.5) * curve;
+  const oz = ((z1 * 23 + x2 * 37) % 100 / 100 - 0.5) * curve;
+  const cx = (x1+x2)/2 + ox;
+  const cz = (z1+z2)/2 + oz;
+
+  const pts = [];
+  for (let i = 0; i <= n; i++) {
+    const t = i / n;
+    pts.push({
+      x: (1-t)*(1-t)*x1 + 2*(1-t)*t*cx + t*t*x2,
+      z: (1-t)*(1-t)*z1 + 2*(1-t)*t*cz + t*t*z2
+    });
+  }
+  return pts;
+}
+
+function genWinding(x1, z1, x2, z2, segments, jitter) {
+  const pts = [];
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments;
+    const baseX = x1 + (x2-x1)*t;
+    const baseZ = z1 + (z2-z1)*t;
+    const jx = Math.sin(t * 12.9 + x1 * 0.01) * jitter;
+    const jz = Math.cos(t * 15.1 + z1 * 0.01) * jitter;
+    pts.push({ x: baseX + jx, z: baseZ + jz });
+  }
+  return pts;
+}
+
+function addRoad(pts, width, type) {
+  const color = type === 'highway' ? 0x555555 : type === 'street' ? 0x444444 : 0x8B7355;
+  buildRoadStrip(pts, width, color);
+  if (type !== 'dirt') buildDashes(pts, type === 'highway' ? 0xaaaa33 : 0x666666);
+
+  roads.push({ pts, width, type });
+  for (let i = 0; i < pts.length - 1; i++) {
+    rSegs.push({ a: pts[i], b: pts[i+1], width, type });
+  }
+}
+
+// ─── CITY GRID ────────────────────────────────────────
+const CR = 300, BS = 55;
+
+const avenues = [];
+for (let i = -4; i <= 4; i++) {
+  const x = i * BS;
+  if (Math.abs(x) < CR) {
+    avenues.push(x);
+    addRoad(genStraight(x, -CR, x, CR), 7, 'street');
+  }
+}
+
+const streets = [];
+for (let j = -4; j <= 4; j++) {
+  const z = j * BS;
+  if (Math.abs(z) < CR) {
+    streets.push(z);
+    addRoad(genStraight(-CR, z, CR, z), 7, 'street');
+  }
+}
+
+// Main boulevards
+addRoad(genStraight(0, -CR - 30, 0, CR + 30), 12, 'highway');
+addRoad(genStraight(-CR - 30, 0, CR + 30, 0), 12, 'highway');
+
+// Ring road around downtown
+{
+  const pts = [];
+  for (let a = 0; a < Math.PI * 2; a += 0.1) {
+    pts.push({ x: Math.cos(a) * CR, z: Math.sin(a) * CR });
+  }
+  addRoad(pts, 10, 'highway');
+}
+
+// Outer ring
+{
+  const pts = [];
+  for (let a = 0; a < Math.PI * 2; a += 0.1) {
+    pts.push({ x: Math.cos(a) * (CR + 200), z: Math.sin(a) * (CR + 200) });
+  }
+  addRoad(pts, 8, 'highway');
+}
+
+// ─── VILLAGES ─────────────────────────────────────────
+const villages = [
+  { x: -1200, z: -800 },
+  { x: 1500, z: 600 },
+  { x: -600, z: 1600 },
+  { x: 1800, z: -1400 },
+  { x: -1600, z: 1200 },
+];
+
+// Highways connecting villages to outer ring
+for (const v of villages) {
+  const ang = Math.atan2(v.z, v.x);
+  const ringX = Math.cos(ang) * (CR + 200);
+  const ringZ = Math.sin(ang) * (CR + 200);
+  addRoad(genCurve(ringX, ringZ, v.x, v.z, 100), 8, 'highway');
+}
+
+// Highway ring connecting villages
+{
+  const sorted = [...villages].sort((a, b) => Math.atan2(a.z, a.x) - Math.atan2(b.z, b.x));
+  for (let i = 0; i < sorted.length; i++) {
+    const a = sorted[i], b = sorted[(i+1) % sorted.length];
+    addRoad(genCurve(a.x, a.z, b.x, b.z, 150), 6, 'highway');
+  }
+}
+
+// Dirt trails between villages
+for (let i = 0; i < villages.length; i++) {
+  const a = villages[i];
+  const b = villages[(i+2) % villages.length];
+  addRoad(genWinding(a.x, a.z, b.x, b.z, 15, 70), 3.5, 'dirt');
+}
+
+// Scenic trails from each village
+for (const v of villages) {
+  for (let k = 0; k < 2; k++) {
+    const ang = (v.x * 7 + v.z * 13 + k * 97) % (Math.PI * 2);
+    const dist = 300 + ((v.x * 3 + v.z * 7 + k * 41) % 400);
+    const ex = v.x + Math.cos(ang) * dist;
+    const ez = v.z + Math.sin(ang) * dist;
+    addRoad(genWinding(v.x, v.z, ex, ez, 12, 80), 3, 'dirt');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// BUILDINGS
+// ═══════════════════════════════════════════════════════
+const buildings = [];
+
+function addBuilding(x, z, w, h, d) {
+  const y = terrainH(x, z);
+  const r = 0.3 + ((x * 17 + z * 31) % 100) / 100 * 0.35;
+  const g = 0.3 + ((x * 23 + z * 41) % 100) / 100 * 0.35;
+  const b = 0.3 + ((x * 29 + z * 53) % 100) / 100 * 0.35;
+  const mat = new THREE.MeshLambertMaterial({ color: new THREE.Color(r, g, b), flatShading: true });
+  const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+  mesh.position.set(x, y + h / 2, z);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  scene.add(mesh);
+  buildings.push({ x, z, w, d });
+}
+
+function onRoad(x, z, margin) {
+  for (const r of roads) {
+    for (let i = 0; i < r.pts.length - 1; i++) {
+      const p1 = r.pts[i], p2 = r.pts[i+1];
+      const dx = p2.x - p1.x, dz = p2.z - p1.z;
+      const l2 = dx*dx + dz*dz;
+      if (!l2) continue;
+      let t = ((x-p1.x)*dx + (z-p1.z)*dz) / l2;
+      t = Math.max(0, Math.min(1, t));
+      const cx = p1.x + t*dx, cz = p1.z + t*dz;
+      if (Math.sqrt((x-cx)**2 + (z-cz)**2) < r.width/2 + margin) return true;
+    }
+  }
+  return false;
+}
+
+function overlaps(x, z, w, d, pad) {
+  for (const b of buildings) {
+    if (Math.abs(x-b.x) < (w+b.w)/2+pad && Math.abs(z-b.z) < (d+b.d)/2+pad) return true;
+  }
+  return false;
+}
+
+// City block buildings
+for (let ai = 0; ai < avenues.length - 1; ai++) {
+  for (let sj = 0; sj < streets.length - 1; sj++) {
+    const x0 = avenues[ai] + 5, x1 = avenues[ai+1] - 5;
+    const z0 = streets[sj] + 5, z1 = streets[sj+1] - 5;
+    if (x1 - x0 < 10 || z1 - z0 < 10) continue;
+
+    const mx = (x0+x1)/2, mz = (z0+z1)/2;
+    const distC = Math.sqrt(mx*mx + mz*mz);
+    const heightBoost = Math.max(0, 1 - distC / CR) * 25;
+
+    const nBuildings = 1 + Math.floor(((ai * 7 + sj * 13) % 3));
+    for (let n = 0; n < nBuildings; n++) {
+      const seed = ai * 100 + sj * 10 + n;
+      const bw = 4 + (seed * 7 % 100) / 100 * (x1-x0-10) / nBuildings;
+      const bd = 4 + (seed * 11 % 100) / 100 * (z1-z0-10) / nBuildings;
+      const bh = 5 + (seed * 13 % 100) / 100 * 12 + heightBoost;
+      const px = x0 + (seed * 17 % 100) / 100 * (x1-x0-bw) + bw/2;
+      const pz = z0 + (seed * 19 % 100) / 100 * (z1-z0-bd) + bd/2;
+
+      if (!overlaps(px, pz, bw, bd)) {
+        addBuilding(px, pz, bw, bh, bd);
+      }
+    }
+  }
+}
+
+// Village buildings
+for (const v of villages) {
+  for (let i = 0; i < 10; i++) {
+    const seed = Math.round(v.x * 100 + v.z * 10 + i * 7);
+    const ang = (seed * 37 % 360) * Math.PI / 180;
+    const dist = 20 + (seed * 53 % 100) / 100 * 100;
+    const x = v.x + Math.cos(ang) * dist;
+    const z = v.z + Math.sin(ang) * dist;
+    const w = 4 + (seed * 17 % 100) / 100 * 6;
+    const h = 5 + (seed * 23 % 100) / 100 * 12;
+    const d = 4 + (seed * 29 % 100) / 100 * 6;
+
+    if (!onRoad(x, z, 2) && !overlaps(x, z, w, d)) {
+      addBuilding(x, z, w, h, d);
+    }
+  }
+}
+
+console.log('Scene built. Objects:', scene.children.length);
+
+// ═══════════════════════════════════════════════════════
+// ROAD DETECTION
+// ═══════════════════════════════════════════════════════
+function getRoadType(x, z) {
+  let bestD = Infinity, best = null;
+  for (const s of rSegs) {
+    const dx = s.b.x - s.a.x, dz = s.b.z - s.a.z;
+    const l2 = dx*dx + dz*dz;
+    if (!l2) continue;
+    let t = ((x - s.a.x)*dx + (z - s.a.z)*dz) / l2;
+    t = Math.max(0, Math.min(1, t));
+    const cx = s.a.x + t*dx, cz = s.a.z + t*dz;
+    const d = Math.sqrt((x-cx)**2 + (z-cz)**2);
+    if (d < bestD) { bestD = d; best = s; }
+  }
+  return (best && bestD < best.width/2 + 3) ? best.type : null;
+}
+
+// ═══════════════════════════════════════════════════════
+// CAR
+// ═══════════════════════════════════════════════════════
+const car = new THREE.Group();
+
+{
+  const body = new THREE.Mesh(
+    new THREE.BoxGeometry(2.2, 1.2, 4.4),
+    new THREE.MeshLambertMaterial({ color: 0xdd2222, flatShading: true })
+  );
+  body.position.y = 0.6;
+  body.castShadow = true;
+  car.add(body);
+}
+
+{
+  const cabin = new THREE.Mesh(
+    new THREE.BoxGeometry(1.8, 0.8, 2.2),
+    new THREE.MeshLambertMaterial({ color: 0x222233, flatShading: true })
+  );
+  cabin.position.set(0, 1.3, -0.2);
+  cabin.castShadow = true;
+  car.add(cabin);
+}
+
+const wheels = [];
+{
+  const wg = new THREE.CylinderGeometry(0.4, 0.4, 0.25, 8);
+  const wm = new THREE.MeshLambertMaterial({ color: 0x111111, flatShading: true });
+  const positions = [[-1.1, 1.3], [1.1, 1.3], [-1.1, -1.3], [1.1, -1.3]];
+  for (const [wx, wz] of positions) {
+    const w = new THREE.Mesh(wg, wm);
+    w.rotation.z = Math.PI / 2;
+    w.position.set(wx, 0.1, wz);
+    w.castShadow = true;
+    car.add(w);
+    wheels.push(w);
+  }
+}
+
+const spawnH = terrainH(0, 0) + 0.6;
+car.position.set(0, spawnH, 0);
+scene.add(car);
+
+// ═══════════════════════════════════════════════════════
+// CAR PHYSICS
+// ═══════════════════════════════════════════════════════
+const cs = {
+  vel: 0, heading: 0, steer: 0,
+  pos: new THREE.Vector3(0, spawnH, 0),
+  fwd: new THREE.Vector3(0, 0, -1),
+  onRoad: null,
+};
+
+function updateCar(dt) {
+  const k = window._keys || {};
+  cs.onRoad = getRoadType(cs.pos.x, cs.pos.z);
+
+  if (k['w'] || k['arrowup']) cs.vel += 30 * dt;
+  if (k['s'] || k['arrowdown']) cs.vel -= 35 * dt;
+  if (k[' ']) cs.vel *= 0.92;
+
+  let frict = 0.97, maxS = 90;
+  if (cs.onRoad === 'highway') { frict = 0.99; maxS = 90; }
+  else if (cs.onRoad === 'street') { frict = 0.99; maxS = 72; }
+  else if (cs.onRoad === 'dirt') { frict = 0.98; maxS = 40; }
+  else { frict = 0.97; maxS = 90; }
+
+  cs.vel *= frict;
+  cs.vel = Math.max(-25, Math.min(maxS, cs.vel));
+
+  let ts = 0;
+  if (k['a'] || k['arrowleft']) ts = 0.7;
+  if (k['d'] || k['arrowright']) ts = -0.7;
+  cs.steer += (ts - cs.steer) * Math.min(1, 3 * dt * 5);
+
+  const sf = Math.min(1, Math.abs(cs.vel) / 20);
+  cs.heading += cs.steer * sf * 2.5 * dt;
+
+  cs.fwd.set(-Math.sin(cs.heading), 0, -Math.cos(cs.heading));
+  cs.pos.x += cs.fwd.x * cs.vel * dt;
+  cs.pos.z += cs.fwd.z * cs.vel * dt;
+  cs.pos.y = terrainH(cs.pos.x, cs.pos.z) + 0.6;
+
+  const sx = (terrainH(cs.pos.x+2, cs.pos.z) - terrainH(cs.pos.x-2, cs.pos.z)) / 4;
+  const sz = (terrainH(cs.pos.x, cs.pos.z+2) - terrainH(cs.pos.x, cs.pos.z-2)) / 4;
+  cs.vel += -(sx * cs.fwd.x + sz * cs.fwd.z) * 12 * dt;
+
+  for (const b of buildings) {
+    const dx = cs.pos.x - b.x, dz = cs.pos.z - b.z;
+    const ox = (b.w/2 + 1.3) - Math.abs(dx);
+    const od = (b.d/2 + 2.5) - Math.abs(dz);
+    if (ox > 0 && od > 0) {
+      if (ox < od) { cs.pos.x += Math.sign(dx) * ox; cs.vel *= 0.3; }
+      else { cs.pos.z += Math.sign(dz) * od; cs.vel *= 0.3; }
+    }
+  }
+
+  const lim = TS/2 - 50;
+  cs.pos.x = Math.max(-lim, Math.min(lim, cs.pos.x));
+  cs.pos.z = Math.max(-lim, Math.min(lim, cs.pos.z));
+
+  car.position.copy(cs.pos);
+  car.rotation.y = cs.heading;
+
+  const slx = (terrainH(cs.pos.x+2,cs.pos.z) - terrainH(cs.pos.x-2,cs.pos.z)) / 4;
+  const slz = (terrainH(cs.pos.x,cs.pos.z+2) - terrainH(cs.pos.x,cs.pos.z-2)) / 4;
+  car.rotation.x = -slz * 0.4;
+  car.rotation.z = slx * 0.4;
+
+  for (const w of wheels) w.rotation.x += cs.vel * dt * 0.8;
+
+  if (k['r']) {
+    const ry = terrainH(0,0) + 0.6;
+    cs.pos.set(0, ry, 0);
+    cs.vel = 0; cs.heading = 0; cs.steer = 0;
+    cs.fwd.set(0, 0, -1);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// CAMERA
+// ═══════════════════════════════════════════════════════
+const camState = {
+  dist: 14, height: 7,
+  orbitYaw: Math.PI, orbitPitch: 0.15,
+  smoothYaw: Math.PI, smoothPitch: 0.15,
+  dragging: false, lastX: 0, lastY: 0,
+};
+
+renderer.domElement.addEventListener('mousedown', e => {
+  camState.dragging = true;
+  camState.lastX = e.clientX;
+  camState.lastY = e.clientY;
+  document.getElementById('hint').style.opacity = '0';
+});
+window.addEventListener('mouseup', () => { camState.dragging = false; });
+window.addEventListener('mousemove', e => {
+  if (!camState.dragging) return;
+  camState.orbitYaw -= (e.clientX - camState.lastX) * 0.005;
+  camState.orbitPitch += (e.clientY - camState.lastY) * 0.005;
+  camState.orbitPitch = Math.max(-0.3, Math.min(1.2, camState.orbitPitch));
+  camState.lastX = e.clientX;
+  camState.lastY = e.clientY;
+});
+renderer.domElement.addEventListener('wheel', e => {
+  camState.dist = Math.max(5, Math.min(30, camState.dist + e.deltaY * 0.01));
+});
+
+let tLastX, tLastY;
+renderer.domElement.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    camState.dragging = true;
+    tLastX = e.touches[0].clientX;
+    tLastY = e.touches[0].clientY;
+    document.getElementById('hint').style.opacity = '0';
+  }
+});
+renderer.domElement.addEventListener('touchmove', e => {
+  if (!camState.dragging || e.touches.length !== 1) return;
+  camState.orbitYaw -= (e.touches[0].clientX - tLastX) * 0.005;
+  camState.orbitPitch += (e.touches[0].clientY - tLastY) * 0.005;
+  camState.orbitPitch = Math.max(-0.3, Math.min(1.2, camState.orbitPitch));
+  tLastX = e.touches[0].clientX;
+  tLastY = e.touches[0].clientY;
+});
+renderer.domElement.addEventListener('touchend', () => { camState.dragging = false; });
+
+function updateCamera(dt) {
+  const s = 1 - Math.pow(0.005, dt);
+  camState.smoothYaw += (camState.orbitYaw - camState.smoothYaw) * s;
+  camState.smoothPitch += (camState.orbitPitch - camState.smoothPitch) * s;
+
+  const yaw = cs.heading + camState.smoothYaw;
+  const pitch = camState.smoothPitch;
+  const hd = Math.cos(pitch) * camState.dist;
+  const vd = Math.sin(pitch) * camState.dist;
+
+  const tx = cs.pos.x + Math.sin(yaw) * hd;
+  const ty = cs.pos.y + vd + camState.height;
+  const tz = cs.pos.z + Math.cos(yaw) * hd;
+
+  const lf = 1 - Math.pow(0.008, dt);
+  camera.position.x += (tx - camera.position.x) * lf;
+  camera.position.y += (ty - camera.position.y) * lf;
+  camera.position.z += (tz - camera.position.z) * lf;
+  camera.lookAt(cs.pos.x, cs.pos.y + 1.5, cs.pos.z);
+}
+
+// ═══════════════════════════════════════════════════════
+// MINIMAP
+// ═══════════════════════════════════════════════════════
+const mmCanvas = document.getElementById('minimap');
+const mmCtx = mmCanvas.getContext('2d');
+mmCanvas.width = 160;
+mmCanvas.height = 160;
+
+function drawMinimap() {
+  const w = mmCanvas.width, h = mmCanvas.height;
+  const sc = w / TS;
+  mmCtx.fillStyle = '#1a2a1a';
+  mmCtx.fillRect(0, 0, w, h);
+
+  for (const r of roads) {
+    mmCtx.strokeStyle = r.type === 'dirt' ? '#8B7355' : r.type === 'highway' ? '#999' : '#666';
+    mmCtx.lineWidth = r.type === 'highway' ? 2 : 1;
+    mmCtx.beginPath();
+    for (let i = 0; i < r.pts.length; i++) {
+      const p = r.pts[i];
+      const mx = (p.x + TS/2) * sc;
+      const mz = (p.z + TS/2) * sc;
+      if (i === 0) mmCtx.moveTo(mx, mz);
+      else mmCtx.lineTo(mx, mz);
+    }
+    mmCtx.stroke();
+  }
+
+  const cx = (cs.pos.x + TS/2) * sc;
+  const cz = (cs.pos.z + TS/2) * sc;
+  mmCtx.fillStyle = '#ff3333';
+  mmCtx.beginPath();
+  mmCtx.arc(cx, cz, 3, 0, Math.PI * 2);
+  mmCtx.fill();
+}
+
+// ═══════════════════════════════════════════════════════
+// INPUT
+// ═══════════════════════════════════════════════════════
+window._keys = {};
+window.addEventListener('keydown', e => { window._keys[e.key.toLowerCase()] = true; });
+window.addEventListener('keyup', e => { window._keys[e.key.toLowerCase()] = false; });
+
+// ═══════════════════════════════════════════════════════
+// HUD
+// ═══════════════════════════════════════════════════════
+const spdEl = document.getElementById('spd');
+const infoEl = document.getElementById('info');
+
+const ROAD_NAMES = { highway: 'HIGHWAY', street: 'CITY STREET', dirt: 'DIRT TRAIL' };
+const ROAD_COLORS = { highway: '#aaffaa', street: '#cccccc', dirt: '#c8a86e' };
+
+function updateHUD() {
+  spdEl.textContent = Math.round(Math.abs(cs.vel * 3.6));
+  if (cs.onRoad) {
+    infoEl.textContent = ROAD_NAMES[cs.onRoad];
+    infoEl.style.color = ROAD_COLORS[cs.onRoad];
+  } else {
+    infoEl.textContent = 'OFF-ROAD';
+    infoEl.style.color = '#ff8888';
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// GAME LOOP
+// ═══════════════════════════════════════════════════════
+let lastTime = performance.now();
+let mmTimer = 0;
+let frameCount = 0;
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  const now = performance.now();
+  let dt = (now - lastTime) / 1000;
+  lastTime = now;
+  dt = Math.min(dt, 0.05);
+
+  updateCar(dt);
+  updateCamera(dt);
+  updateHUD();
+
+  mmTimer += dt;
+  if (mmTimer > 0.15) {
+    mmTimer = 0;
+    drawMinimap();
+  }
+
+  renderer.render(scene, camera);
+
+  // Debug: log first frame
+  frameCount++;
+  if (frameCount === 1) {
+    console.log('First frame rendered. Camera:', camera.position.x, camera.position.y, camera.position.z);
+    console.log('Car at:', cs.pos.x, cs.pos.y, cs.pos.z);
+    console.log('Terrain at origin:', terrainH(0, 0));
+    console.log('Scene children:', scene.children.length);
+  }
+}
+
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>
