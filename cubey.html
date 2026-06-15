@@ -24,7 +24,7 @@ canvas { display: block; }
 }
 #minimap {
   position: fixed; bottom: 20px; right: 20px;
-  width: 160px; height: 160px;
+  width: 180px; height: 180px;
   border: 2px solid rgba(255,255,255,0.4);
   border-radius: 4px; z-index: 10; pointer-events: none;
 }
@@ -48,9 +48,6 @@ canvas { display: block; }
 
 <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 <script>
-// ═══════════════════════════════════════════════════════
-// VERIFY THREE LOADED
-// ═══════════════════════════════════════════════════════
 console.log('THREE:', THREE.REVISION);
 
 // ═══════════════════════════════════════════════════════
@@ -64,19 +61,17 @@ document.body.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x6BB3E0);
 
-const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1500);
-camera.position.set(0, 50, 80);
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
+camera.position.set(0, 80, 120);
 camera.lookAt(0, 0, 0);
 
 // ═══════════════════════════════════════════════════════
 // LIGHTING
 // ═══════════════════════════════════════════════════════
 scene.add(new THREE.AmbientLight(0x99aabb, 1.0));
-
 const sun = new THREE.DirectionalLight(0xffeedd, 1.5);
 sun.position.set(300, 400, 200);
 scene.add(sun);
-
 scene.add(new THREE.HemisphereLight(0x88bbff, 0x556644, 0.5));
 
 // ═══════════════════════════════════════════════════════
@@ -99,27 +94,50 @@ function noise2D(x, y) {
 }
 function fbm(x, y) {
   let v = 0, a = 1, f = 1;
-  for (let i = 0; i < 4; i++) { v += noise2D(x * f, y * f) * a; a *= 0.5; f *= 2; }
+  for (let i = 0; i < 5; i++) { v += noise2D(x * f, y * f) * a; a *= 0.5; f *= 2; }
   return v;
 }
 
 // ═══════════════════════════════════════════════════════
 // TERRAIN HEIGHT
 // ═══════════════════════════════════════════════════════
+const TS = 5000;
+const TSEG = 250;
+
+// Mount Fuji: massive cone at (800, -600)
+const FUJI_X = 800, FUJI_Z = -600, FUJI_R = 500, FUJI_H = 180;
+
 function terrainH(x, z) {
-  let h = fbm(x * 0.001, z * 0.001) * 25 + 5;
-  h += fbm(x * 0.004, z * 0.004) * 5;
-  const d = Math.sqrt(x * x + z * z);
-  if (d < 600) h *= d / 600;
+  // Base rolling hills
+  let h = fbm(x * 0.0008, z * 0.0008) * 20 + 8;
+  h += fbm(x * 0.003, z * 0.003) * 6;
+  h += fbm(x * 0.008, z * 0.008) * 2;
+
+  // Mount Fuji — smooth cone
+  const dFuji = Math.sqrt((x - FUJI_X) ** 2 + (z - FUJI_Z) ** 2);
+  if (dFuji < FUJI_R) {
+    const fujiH = FUJI_H * (1 - dFuji / FUJI_R);
+    // Smooth blend at base
+    const blend = Math.min(1, (FUJI_R - dFuji) / 80);
+    h = Math.max(h, fujiH * blend);
+  }
+
+  // Flatten center for city
+  const dc = Math.sqrt(x * x + z * z);
+  if (dc < 700) h *= dc / 700;
+
+  // Flatten village areas
+  for (const v of villages) {
+    const d = Math.sqrt((x - v.x) ** 2 + (z - v.z) ** 2);
+    if (d < 300) h *= d / 300;
+  }
+
   return Math.max(0, h);
 }
 
 // ═══════════════════════════════════════════════════════
 // TERRAIN MESH
 // ═══════════════════════════════════════════════════════
-const TS = 4000;
-const TSEG = 180;
-
 {
   const geo = new THREE.PlaneGeometry(TS, TS, TSEG, TSEG);
   geo.rotateX(-Math.PI / 2);
@@ -130,10 +148,29 @@ const TSEG = 180;
     const x = pos.getX(i), z = pos.getZ(i);
     const h = terrainH(x, z);
     pos.setY(i, h);
-    const t = Math.max(0, Math.min(1, (h + 10) / 45));
-    cols[i*3]   = 0.22 + t * 0.20;
-    cols[i*3+1] = 0.30 + t * 0.28;
-    cols[i*3+2] = 0.18 + t * 0.12;
+
+    // Color based on height and slope
+    const t = Math.max(0, Math.min(1, h / 60));
+    // Check if near water (low areas)
+    const slopeX = terrainH(x+5, z) - terrainH(x-5, z);
+    const slopeZ = terrainH(x, z+5) - terrainH(x, z-5);
+    const slope = Math.sqrt(slopeX * slopeX + slopeZ * slopeZ);
+
+    let r, g, b;
+    if (h < 2) {
+      // Sandy/shore
+      r = 0.55; g = 0.52; b = 0.42;
+    } else if (h < 15) {
+      // Grass
+      r = 0.22 + t * 0.1; g = 0.35 + t * 0.2; b = 0.15 + t * 0.05;
+    } else if (h < 50) {
+      // Rocky
+      r = 0.35 + t * 0.15; g = 0.33 + t * 0.15; b = 0.28 + t * 0.1;
+    } else {
+      // Snow caps
+      r = 0.7 + t * 0.2; g = 0.7 + t * 0.2; b = 0.72 + t * 0.2;
+    }
+    cols[i*3] = r; cols[i*3+1] = g; cols[i*3+2] = b;
   }
   geo.setAttribute('color', new THREE.BufferAttribute(cols, 3));
   geo.computeVertexNormals();
@@ -144,12 +181,145 @@ const TSEG = 180;
 }
 
 // ═══════════════════════════════════════════════════════
+// LAKES — flat blue water at low terrain areas
+// ═══════════════════════════════════════════════════════
+{
+  // Lake 1: southwest area
+  const lakeGeo = new THREE.CircleGeometry(200, 32);
+  lakeGeo.rotateX(-Math.PI / 2);
+  const lake1 = new THREE.Mesh(lakeGeo, new THREE.MeshLambertMaterial({ color: 0x2266aa, flatShading: true }));
+  lake1.position.set(-800, 0.3, 800);
+  scene.add(lake1);
+
+  // Lake 2: southeast
+  const lakeGeo2 = new THREE.CircleGeometry(150, 32);
+  lakeGeo2.rotateX(-Math.PI / 2);
+  const lake2 = new THREE.Mesh(lakeGeo2, new THREE.MeshLambertMaterial({ color: 0x2266aa, flatShading: true }));
+  lake2.position.set(1000, 0.3, 900);
+  scene.add(lake2);
+
+  // Lake 3: near Mount Fuji (crater lake)
+  const lakeGeo3 = new THREE.CircleGeometry(80, 24);
+  lakeGeo3.rotateX(-Math.PI / 2);
+  const lake3 = new THREE.Mesh(lakeGeo3, new THREE.MeshLambertMaterial({ color: 0x3388cc, flatShading: true }));
+  lake3.position.set(800, 0.3, -350);
+  scene.add(lake3);
+}
+
+// ═══════════════════════════════════════════════════════
+// RIVERS — blue strips flowing downhill
+// ═══════════════════════════════════════════════════════
+function buildRiver(points, width) {
+  const riverGeo = new THREE.BufferGeometry();
+  const hw = width / 2;
+  const v = [];
+  const idx = [];
+
+  for (let i = 0; i < points.length; i++) {
+    const p = points[i];
+    const h = Math.max(0.1, terrainH(p.x, p.z) - 0.5);
+
+    let dx, dz;
+    if (i < points.length - 1) { dx = points[i+1].x - p.x; dz = points[i+1].z - p.z; }
+    else { dx = p.x - points[i-1].x; dz = p.z - points[i-1].z; }
+    const len = Math.sqrt(dx*dx + dz*dz) || 1;
+    const nx = -dz / len * hw;
+    const nz = dx / len * hw;
+
+    v.push(p.x + nx, h, p.z + nz);
+    v.push(p.x - nx, h, p.z - nz);
+    if (i > 0) { const vi = i * 2; idx.push(vi-2, vi, vi-1, vi-1, vi, vi+1); }
+  }
+
+  riverGeo.setAttribute('position', new THREE.Float32BufferAttribute(v, 3));
+  riverGeo.setIndex(idx);
+  riverGeo.computeVertexNormals();
+  const mesh = new THREE.Mesh(riverGeo, new THREE.MeshLambertMaterial({ color: 0x2277bb, flatShading: true }));
+  mesh.receiveShadow = true;
+  scene.add(mesh);
+}
+
+// River from Mount Fuji flowing south
+{
+  const pts = [];
+  for (let i = 0; i <= 30; i++) {
+    const t = i / 30;
+    pts.push({
+      x: FUJI_X + Math.sin(t * 2) * 100 + t * 200,
+      z: FUJI_Z + FUJI_R * 0.8 + t * 600
+    });
+  }
+  buildRiver(pts, 8);
+}
+
+// River flowing west from hills
+{
+  const pts = [];
+  for (let i = 0; i <= 25; i++) {
+    const t = i / 25;
+    pts.push({
+      x: 1200 - t * 1500,
+      z: -200 + Math.sin(t * 3) * 150
+    });
+  }
+  buildRiver(pts, 6);
+}
+
+// ═══════════════════════════════════════════════════════
+// FORESTS — clusters of tree-like boxes
+// ═══════════════════════════════════════════════════════
+function addTree(x, z) {
+  const h = terrainH(x, z);
+  if (h < 2 || h > 40) return; // only on grass, not snow or shore
+  const trunkH = 2 + ((x * 17 + z * 31) % 100) / 100 * 3;
+  const trunk = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.3, 0.4, trunkH, 5),
+    new THREE.MeshLambertMaterial({ color: 0x5c3a1e, flatShading: true })
+  );
+  trunk.position.set(x, h + trunkH / 2, z);
+  trunk.castShadow = true;
+  scene.add(trunk);
+
+  const crownH = 2 + ((x * 23 + z * 41) % 100) / 100 * 2;
+  const crown = new THREE.Mesh(
+    new THREE.ConeGeometry(1.5, crownH, 6),
+    new THREE.MeshLambertMaterial({ color: 0x1a5c1a, flatShading: true })
+  );
+  crown.position.set(x, h + trunkH + crownH / 2, z);
+  crown.castShadow = true;
+  scene.add(crown);
+}
+
+// Forest clusters
+const forestCenters = [
+  { x: -400, z: -1200, r: 250, count: 60 },
+  { x: 600, z: -1000, r: 200, count: 40 },
+  { x: -1400, z: -400, r: 300, count: 70 },
+  { x: 1200, z: 300, r: 200, count: 40 },
+  { x: -1000, z: 800, r: 250, count: 50 },
+  { x: 400, z: 1200, r: 200, count: 40 },
+  { x: -600, z: 400, r: 150, count: 30 },
+  { x: 1600, z: -800, r: 180, count: 35 },
+];
+
+for (const fc of forestCenters) {
+  for (let i = 0; i < fc.count; i++) {
+    const seed = Math.round(fc.x * 100 + fc.z * 10 + i * 7);
+    const ang = (seed * 37 % 360) * Math.PI / 180;
+    const dist = (seed * 53 % 100) / 100 * fc.r;
+    const x = fc.x + Math.cos(ang) * dist;
+    const z = fc.z + Math.sin(ang) * dist;
+    addTree(x, z);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
 // ROAD SYSTEM
 // ═══════════════════════════════════════════════════════
 const roads = [];
 const rSegs = [];
 
-function roadSurfH(x, z) { return terrainH(x, z) + 0.2; }
+function roadSurfH(x, z) { return terrainH(x, z) + 0.15; }
 
 function buildRoadStrip(pts, width, color) {
   if (pts.length < 2) return;
@@ -162,25 +332,15 @@ function buildRoadStrip(pts, width, color) {
     const h = roadSurfH(p.x, p.z);
 
     let dx, dz;
-    if (i < pts.length - 1) {
-      dx = pts[i+1].x - p.x;
-      dz = pts[i+1].z - p.z;
-    } else {
-      dx = p.x - pts[i-1].x;
-      dz = p.z - pts[i-1].z;
-    }
+    if (i < pts.length - 1) { dx = pts[i+1].x - p.x; dz = pts[i+1].z - p.z; }
+    else { dx = p.x - pts[i-1].x; dz = p.z - pts[i-1].z; }
     const len = Math.sqrt(dx*dx + dz*dz) || 1;
     const nx = -dz / len * hw;
     const nz = dx / len * hw;
 
     v.push(p.x + nx, h, p.z + nz);
     v.push(p.x - nx, h, p.z - nz);
-
-    if (i > 0) {
-      const vi = i * 2;
-      idx.push(vi-2, vi, vi-1);
-      idx.push(vi-1, vi, vi+1);
-    }
+    if (i > 0) { const vi = i * 2; idx.push(vi-2, vi, vi-1, vi-1, vi, vi+1); }
   }
 
   const geo = new THREE.BufferGeometry();
@@ -196,10 +356,9 @@ function buildRoadStrip(pts, width, color) {
 
 function buildDashes(pts, color) {
   if (pts.length < 2) return;
-  const geo = new THREE.PlaneGeometry(0.2, 1.0);
+  const geo = new THREE.PlaneGeometry(0.2, 1.2);
   const mat = new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide, depthWrite: false });
-
-  for (let i = 0; i < pts.length - 1; i += 5) {
+  for (let i = 0; i < pts.length - 1; i += 4) {
     const p = pts[i];
     const pn = pts[Math.min(i + 1, pts.length - 1)];
     const m = new THREE.Mesh(geo, mat);
@@ -210,9 +369,37 @@ function buildDashes(pts, color) {
   }
 }
 
+// Catmull-Rom spline interpolation for smooth roads
+function catmullRom(p0, p1, p2, p3, t) {
+  const t2 = t * t, t3 = t2 * t;
+  return {
+    x: 0.5 * ((2*p1.x) + (-p0.x+p2.x)*t + (2*p0.x-5*p1.x+4*p2.x-p3.x)*t2 + (-p0.x+3*p1.x-3*p2.x+p3.x)*t3),
+    z: 0.5 * ((2*p1.z) + (-p0.z+p2.z)*t + (2*p0.z-5*p1.z+4*p2.z-p3.z)*t2 + (-p0.z+3*p1.z-3*p2.z+p3.z)*t3)
+  };
+}
+
+function genSmoothPath(points) {
+  if (points.length < 2) return points;
+  const result = [];
+  const segsPerPair = 8;
+
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = points[Math.max(0, i - 1)];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = points[Math.min(points.length - 1, i + 2)];
+
+    for (let j = 0; j < segsPerPair; j++) {
+      result.push(catmullRom(p0, p1, p2, p3, j / segsPerPair));
+    }
+  }
+  result.push(points[points.length - 1]);
+  return result;
+}
+
 function genStraight(x1, z1, x2, z2) {
   const dist = Math.sqrt((x2-x1)**2 + (z2-z1)**2);
-  const n = Math.max(2, Math.floor(dist / 8));
+  const n = Math.max(2, Math.floor(dist / 6));
   const pts = [];
   for (let i = 0; i <= n; i++) {
     const t = i / n;
@@ -223,7 +410,7 @@ function genStraight(x1, z1, x2, z2) {
 
 function genCurve(x1, z1, x2, z2, curve) {
   const dist = Math.sqrt((x2-x1)**2 + (z2-z1)**2);
-  const n = Math.max(20, Math.floor(dist / 8)); // one vertex every 8 units
+  const n = Math.max(20, Math.floor(dist / 6));
   const ox = ((x1 * 31 + z2 * 17) % 100 / 100 - 0.5) * curve;
   const oz = ((z1 * 23 + x2 * 37) % 100 / 100 - 0.5) * curve;
   const cx = (x1+x2)/2 + ox;
@@ -242,7 +429,7 @@ function genCurve(x1, z1, x2, z2, curve) {
 
 function genWinding(x1, z1, x2, z2, segments, jitter) {
   const dist = Math.sqrt((x2-x1)**2 + (z2-z1)**2);
-  const n = Math.max(15, Math.floor(dist / 8)); // one vertex every 8 units
+  const n = Math.max(15, Math.floor(dist / 6));
   const pts = [];
   for (let i = 0; i <= n; i++) {
     const t = i / n;
@@ -256,21 +443,24 @@ function genWinding(x1, z1, x2, z2, segments, jitter) {
 }
 
 function addRoad(pts, width, type) {
-  const color = type === 'highway' ? 0x555555 : type === 'street' ? 0x444444 : 0x8B7355;
-  buildRoadStrip(pts, width, color);
-  if (type !== 'dirt') buildDashes(pts, type === 'highway' ? 0xaaaa33 : 0x666666);
+  // Smooth the path with Catmull-Rom
+  const smoothPts = pts.length > 2 ? genSmoothPath(pts) : pts;
 
-  roads.push({ pts, width, type });
-  for (let i = 0; i < pts.length - 1; i++) {
-    rSegs.push({ a: pts[i], b: pts[i+1], width, type });
+  const color = type === 'highway' ? 0x555555 : type === 'street' ? 0x444444 : 0x8B7355;
+  buildRoadStrip(smoothPts, width, color);
+  if (type !== 'dirt') buildDashes(smoothPts, type === 'highway' ? 0xaaaa33 : 0x666666);
+
+  roads.push({ pts: smoothPts, width, type });
+  for (let i = 0; i < smoothPts.length - 1; i++) {
+    rSegs.push({ a: smoothPts[i], b: smoothPts[i+1], width, type });
   }
 }
 
-// ─── CITY GRID ────────────────────────────────────────
-const CR = 300, BS = 55;
+// ─── CITY GRID — denser ────────────────────────────────
+const CR = 350, BS = 40;
 
 const avenues = [];
-for (let i = -4; i <= 4; i++) {
+for (let i = -5; i <= 5; i++) {
   const x = i * BS;
   if (Math.abs(x) < CR) {
     avenues.push(x);
@@ -279,7 +469,7 @@ for (let i = -4; i <= 4; i++) {
 }
 
 const streets = [];
-for (let j = -4; j <= 4; j++) {
+for (let j = -5; j <= 5; j++) {
   const z = j * BS;
   if (Math.abs(z) < CR) {
     streets.push(z);
@@ -288,42 +478,51 @@ for (let j = -4; j <= 4; j++) {
 }
 
 // Main boulevards
-addRoad(genStraight(0, -CR - 30, 0, CR + 30), 12, 'highway');
-addRoad(genStraight(-CR - 30, 0, CR + 30, 0), 12, 'highway');
+addRoad(genStraight(0, -CR - 40, 0, CR + 40), 12, 'highway');
+addRoad(genStraight(-CR - 40, 0, CR + 40, 0), 12, 'highway');
 
-// Ring road around downtown
+// Diagonal highways
+addRoad(genCurve(-CR, -CR, CR, CR, 50), 10, 'highway');
+addRoad(genCurve(-CR, CR, CR, -CR, 50), 10, 'highway');
+
+// Ring roads
 {
   const pts = [];
-  for (let a = 0; a < Math.PI * 2; a += 0.1) {
+  for (let a = 0; a < Math.PI * 2; a += 0.06) {
     pts.push({ x: Math.cos(a) * CR, z: Math.sin(a) * CR });
   }
   addRoad(pts, 10, 'highway');
 }
-
-// Outer ring
 {
   const pts = [];
-  for (let a = 0; a < Math.PI * 2; a += 0.1) {
-    pts.push({ x: Math.cos(a) * (CR + 200), z: Math.sin(a) * (CR + 200) });
+  for (let a = 0; a < Math.PI * 2; a += 0.06) {
+    pts.push({ x: Math.cos(a) * (CR + 250), z: Math.sin(a) * (CR + 250) });
+  }
+  addRoad(pts, 8, 'highway');
+}
+{
+  const pts = [];
+  for (let a = 0; a < Math.PI * 2; a += 0.06) {
+    pts.push({ x: Math.cos(a) * (CR + 600), z: Math.sin(a) * (CR + 600) });
   }
   addRoad(pts, 8, 'highway');
 }
 
 // ─── VILLAGES ─────────────────────────────────────────
 const villages = [
-  { x: -1200, z: -800 },
-  { x: 1500, z: 600 },
-  { x: -600, z: 1600 },
-  { x: 1800, z: -1400 },
-  { x: -1600, z: 1200 },
+  { x: -1400, z: -1000 },
+  { x: 1600, z: 700 },
+  { x: -700, z: 1700 },
+  { x: 1900, z: -1500 },
+  { x: -1700, z: 1300 },
 ];
 
-// Highways connecting villages to outer ring
+// Highways from outer ring to each village
 for (const v of villages) {
   const ang = Math.atan2(v.z, v.x);
-  const ringX = Math.cos(ang) * (CR + 200);
-  const ringZ = Math.sin(ang) * (CR + 200);
-  addRoad(genCurve(ringX, ringZ, v.x, v.z, 100), 8, 'highway');
+  const ringX = Math.cos(ang) * (CR + 600);
+  const ringZ = Math.sin(ang) * (CR + 600);
+  addRoad(genCurve(ringX, ringZ, v.x, v.z, 150), 8, 'highway');
 }
 
 // Highway ring connecting villages
@@ -331,26 +530,40 @@ for (const v of villages) {
   const sorted = [...villages].sort((a, b) => Math.atan2(a.z, a.x) - Math.atan2(b.z, b.x));
   for (let i = 0; i < sorted.length; i++) {
     const a = sorted[i], b = sorted[(i+1) % sorted.length];
-    addRoad(genCurve(a.x, a.z, b.x, b.z, 150), 6, 'highway');
+    addRoad(genCurve(a.x, a.z, b.x, b.z, 200), 6, 'highway');
   }
 }
 
-// Dirt trails between villages
+// More highways: cross-country routes
+addRoad(genCurve(-1800, 0, 1800, 0, 300), 6, 'highway');
+addRoad(genCurve(0, -1800, 0, 1800, 300), 6, 'highway');
+addRoad(genCurve(-1500, -1500, 1500, 1500, 400), 6, 'highway');
+addRoad(genCurve(-1500, 1500, 1500, -1500, 400), 6, 'highway');
+
+// Dirt trails everywhere
 for (let i = 0; i < villages.length; i++) {
   const a = villages[i];
   const b = villages[(i+2) % villages.length];
-  addRoad(genWinding(a.x, a.z, b.x, b.z, 15, 70), 3.5, 'dirt');
+  addRoad(genWinding(a.x, a.z, b.x, b.z, 20, 80), 3.5, 'dirt');
+  // Extra scenic trails
+  for (let k = 0; k < 3; k++) {
+    const ang = (a.x * 7 + a.z * 13 + k * 97) % (Math.PI * 2);
+    const dist = 300 + ((a.x * 3 + a.z * 7 + k * 41) % 500);
+    const ex = a.x + Math.cos(ang) * dist;
+    const ez = a.z + Math.sin(ang) * dist;
+    addRoad(genWinding(a.x, a.z, ex, ez, 15, 90), 3, 'dirt');
+  }
 }
 
-// Scenic trails from each village
-for (const v of villages) {
-  for (let k = 0; k < 2; k++) {
-    const ang = (v.x * 7 + v.z * 13 + k * 97) % (Math.PI * 2);
-    const dist = 300 + ((v.x * 3 + v.z * 7 + k * 41) % 400);
-    const ex = v.x + Math.cos(ang) * dist;
-    const ez = v.z + Math.sin(ang) * dist;
-    addRoad(genWinding(v.x, v.z, ex, ez, 12, 80), 3, 'dirt');
-  }
+// Random wilderness trails
+for (let i = 0; i < 15; i++) {
+  const a1 = ((i * 7919) % 10000) / 10000 * Math.PI * 2;
+  const d1 = 500 + ((i * 3571) % 10000) / 10000 * 800;
+  const sx = Math.cos(a1) * d1;
+  const sz = Math.sin(a1) * d1;
+  const a2 = a1 + ((i * 2137) % 10000) / 10000 * 2 - 1;
+  const d2 = 250 + ((i * 4219) % 10000) / 10000 * 500;
+  addRoad(genWinding(sx, sz, sx + Math.cos(a2) * d2, sz + Math.sin(a2) * d2, 12, 80), 3, 'dirt');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -360,6 +573,7 @@ const buildings = [];
 
 function addBuilding(x, z, w, h, d) {
   const y = terrainH(x, z);
+  if (y < 2) return; // don't build on water
   const r = 0.3 + ((x * 17 + z * 31) % 100) / 100 * 0.35;
   const g = 0.3 + ((x * 23 + z * 41) % 100) / 100 * 0.35;
   const b = 0.3 + ((x * 29 + z * 53) % 100) / 100 * 0.35;
@@ -404,39 +618,33 @@ for (let ai = 0; ai < avenues.length - 1; ai++) {
 
     const mx = (x0+x1)/2, mz = (z0+z1)/2;
     const distC = Math.sqrt(mx*mx + mz*mz);
-    const heightBoost = Math.max(0, 1 - distC / CR) * 25;
+    const heightBoost = Math.max(0, 1 - distC / CR) * 30;
 
-    const nBuildings = 1 + Math.floor(((ai * 7 + sj * 13) % 3));
-    for (let n = 0; n < nBuildings; n++) {
+    const nB = 1 + Math.floor(((ai * 7 + sj * 13) % 3));
+    for (let n = 0; n < nB; n++) {
       const seed = ai * 100 + sj * 10 + n;
-      const bw = 4 + (seed * 7 % 100) / 100 * (x1-x0-10) / nBuildings;
-      const bd = 4 + (seed * 11 % 100) / 100 * (z1-z0-10) / nBuildings;
-      const bh = 5 + (seed * 13 % 100) / 100 * 12 + heightBoost;
+      const bw = 4 + (seed * 7 % 100) / 100 * (x1-x0-10) / nB;
+      const bd = 4 + (seed * 11 % 100) / 100 * (z1-z0-10) / nB;
+      const bh = 5 + (seed * 13 % 100) / 100 * 15 + heightBoost;
       const px = x0 + (seed * 17 % 100) / 100 * (x1-x0-bw) + bw/2;
       const pz = z0 + (seed * 19 % 100) / 100 * (z1-z0-bd) + bd/2;
-
-      if (!overlaps(px, pz, bw, bd)) {
-        addBuilding(px, pz, bw, bh, bd);
-      }
+      if (!overlaps(px, pz, bw, bd)) addBuilding(px, pz, bw, bh, bd);
     }
   }
 }
 
 // Village buildings
 for (const v of villages) {
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 12; i++) {
     const seed = Math.round(v.x * 100 + v.z * 10 + i * 7);
     const ang = (seed * 37 % 360) * Math.PI / 180;
-    const dist = 20 + (seed * 53 % 100) / 100 * 100;
+    const dist = 20 + (seed * 53 % 100) / 100 * 120;
     const x = v.x + Math.cos(ang) * dist;
     const z = v.z + Math.sin(ang) * dist;
-    const w = 4 + (seed * 17 % 100) / 100 * 6;
-    const h = 5 + (seed * 23 % 100) / 100 * 12;
-    const d = 4 + (seed * 29 % 100) / 100 * 6;
-
-    if (!onRoad(x, z, 2) && !overlaps(x, z, w, d)) {
-      addBuilding(x, z, w, h, d);
-    }
+    const w = 4 + (seed * 17 % 100) / 100 * 7;
+    const h = 5 + (seed * 23 % 100) / 100 * 15;
+    const d = 4 + (seed * 29 % 100) / 100 * 7;
+    if (!onRoad(x, z, 2) && !overlaps(x, z, w, d)) addBuilding(x, z, w, h, d);
   }
 }
 
@@ -474,7 +682,6 @@ const car = new THREE.Group();
   body.castShadow = true;
   car.add(body);
 }
-
 {
   const cabin = new THREE.Mesh(
     new THREE.BoxGeometry(1.8, 0.8, 2.2),
@@ -489,8 +696,7 @@ const wheels = [];
 {
   const wg = new THREE.CylinderGeometry(0.4, 0.4, 0.25, 8);
   const wm = new THREE.MeshLambertMaterial({ color: 0x111111, flatShading: true });
-  const positions = [[-1.1, 1.3], [1.1, 1.3], [-1.1, -1.3], [1.1, -1.3]];
-  for (const [wx, wz] of positions) {
+  for (const [wx, wz] of [[-1.1, 1.3], [1.1, 1.3], [-1.1, -1.3], [1.1, -1.3]]) {
     const w = new THREE.Mesh(wg, wm);
     w.rotation.z = Math.PI / 2;
     w.position.set(wx, 0.1, wz);
@@ -564,12 +770,10 @@ function updateCar(dt) {
 
   car.position.copy(cs.pos);
   car.rotation.y = cs.heading;
-
   const slx = (terrainH(cs.pos.x+2,cs.pos.z) - terrainH(cs.pos.x-2,cs.pos.z)) / 4;
   const slz = (terrainH(cs.pos.x,cs.pos.z+2) - terrainH(cs.pos.x,cs.pos.z-2)) / 4;
   car.rotation.x = -slz * 0.4;
   car.rotation.z = slx * 0.4;
-
   for (const w of wheels) w.rotation.x += cs.vel * dt * 0.8;
 
   if (k['r']) {
@@ -583,170 +787,128 @@ function updateCar(dt) {
 // ═══════════════════════════════════════════════════════
 // CAMERA
 // ═══════════════════════════════════════════════════════
-const camState = {
-  dist: 14, height: 7,
-  orbitYaw: Math.PI, orbitPitch: 0.15,
-  smoothYaw: Math.PI, smoothPitch: 0.15,
-  dragging: false, lastX: 0, lastY: 0,
+const cam = {
+  dist: 16, height: 8,
+  oYaw: Math.PI, oPitch: 0.12,
+  sYaw: Math.PI, sPitch: 0.12,
+  drag: false, lx: 0, ly: 0,
 };
 
 renderer.domElement.addEventListener('mousedown', e => {
-  camState.dragging = true;
-  camState.lastX = e.clientX;
-  camState.lastY = e.clientY;
+  cam.drag = true; cam.lx = e.clientX; cam.ly = e.clientY;
   document.getElementById('hint').style.opacity = '0';
 });
-window.addEventListener('mouseup', () => { camState.dragging = false; });
+window.addEventListener('mouseup', () => cam.drag = false);
 window.addEventListener('mousemove', e => {
-  if (!camState.dragging) return;
-  camState.orbitYaw -= (e.clientX - camState.lastX) * 0.005;
-  camState.orbitPitch += (e.clientY - camState.lastY) * 0.005;
-  camState.orbitPitch = Math.max(-0.3, Math.min(1.2, camState.orbitPitch));
-  camState.lastX = e.clientX;
-  camState.lastY = e.clientY;
+  if (!cam.drag) return;
+  cam.oYaw -= (e.clientX - cam.lx) * 0.005;
+  cam.oPitch += (e.clientY - cam.ly) * 0.005;
+  cam.oPitch = Math.max(-0.3, Math.min(1.2, cam.oPitch));
+  cam.lx = e.clientX; cam.ly = e.clientY;
 });
 renderer.domElement.addEventListener('wheel', e => {
-  camState.dist = Math.max(5, Math.min(30, camState.dist + e.deltaY * 0.01));
+  cam.dist = Math.max(5, Math.min(30, cam.dist + e.deltaY * 0.01));
 });
 
-let tLastX, tLastY;
+let tx, ty;
 renderer.domElement.addEventListener('touchstart', e => {
-  if (e.touches.length === 1) {
-    camState.dragging = true;
-    tLastX = e.touches[0].clientX;
-    tLastY = e.touches[0].clientY;
-    document.getElementById('hint').style.opacity = '0';
-  }
+  if (e.touches.length === 1) { cam.drag = true; tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+    document.getElementById('hint').style.opacity = '0'; }
 });
 renderer.domElement.addEventListener('touchmove', e => {
-  if (!camState.dragging || e.touches.length !== 1) return;
-  camState.orbitYaw -= (e.touches[0].clientX - tLastX) * 0.005;
-  camState.orbitPitch += (e.touches[0].clientY - tLastY) * 0.005;
-  camState.orbitPitch = Math.max(-0.3, Math.min(1.2, camState.orbitPitch));
-  tLastX = e.touches[0].clientX;
-  tLastY = e.touches[0].clientY;
+  if (!cam.drag || e.touches.length !== 1) return;
+  cam.oYaw -= (e.touches[0].clientX - tx) * 0.005;
+  cam.oPitch += (e.touches[0].clientY - ty) * 0.005;
+  cam.oPitch = Math.max(-0.3, Math.min(1.2, cam.oPitch));
+  tx = e.touches[0].clientX; ty = e.touches[0].clientY;
 });
-renderer.domElement.addEventListener('touchend', () => { camState.dragging = false; });
+renderer.domElement.addEventListener('touchend', () => cam.drag = false);
 
-function updateCamera(dt) {
+function updateCam(dt) {
   const s = 1 - Math.pow(0.005, dt);
-  camState.smoothYaw += (camState.orbitYaw - camState.smoothYaw) * s;
-  camState.smoothPitch += (camState.orbitPitch - camState.smoothPitch) * s;
+  cam.sYaw += (cam.oYaw - cam.sYaw) * s;
+  cam.sPitch += (cam.oPitch - cam.sPitch) * s;
 
-  const yaw = cs.heading + camState.smoothYaw;
-  const pitch = camState.smoothPitch;
-  const hd = Math.cos(pitch) * camState.dist;
-  const vd = Math.sin(pitch) * camState.dist;
+  const yaw = cs.heading + cam.sYaw;
+  const pitch = cam.sPitch;
+  const hd = Math.cos(pitch) * cam.dist;
+  const vd = Math.sin(pitch) * cam.dist;
 
-  const tx = cs.pos.x + Math.sin(yaw) * hd;
-  const ty = cs.pos.y + vd + camState.height;
-  const tz = cs.pos.z + Math.cos(yaw) * hd;
+  const targetX = cs.pos.x + Math.sin(yaw) * hd;
+  const targetY = cs.pos.y + vd + cam.height;
+  const targetZ = cs.pos.z + Math.cos(yaw) * hd;
 
   const lf = 1 - Math.pow(0.008, dt);
-  camera.position.x += (tx - camera.position.x) * lf;
-  camera.position.y += (ty - camera.position.y) * lf;
-  camera.position.z += (tz - camera.position.z) * lf;
+  camera.position.x += (targetX - camera.position.x) * lf;
+  camera.position.y += (targetY - camera.position.y) * lf;
+  camera.position.z += (targetZ - camera.position.z) * lf;
   camera.lookAt(cs.pos.x, cs.pos.y + 1.5, cs.pos.z);
 }
 
 // ═══════════════════════════════════════════════════════
 // MINIMAP
 // ═══════════════════════════════════════════════════════
-const mmCanvas = document.getElementById('minimap');
-const mmCtx = mmCanvas.getContext('2d');
-mmCanvas.width = 160;
-mmCanvas.height = 160;
+const mc = document.getElementById('minimap');
+const mctx = mc.getContext('2d');
+mc.width = 180; mc.height = 180;
 
-function drawMinimap() {
-  const w = mmCanvas.width, h = mmCanvas.height;
-  const sc = w / TS;
-  mmCtx.fillStyle = '#1a2a1a';
-  mmCtx.fillRect(0, 0, w, h);
+function drawMM() {
+  const w = mc.width, h = mc.height, sc = w / TS;
+  mctx.fillStyle = '#1a2a1a'; mctx.fillRect(0, 0, w, h);
 
   for (const r of roads) {
-    mmCtx.strokeStyle = r.type === 'dirt' ? '#8B7355' : r.type === 'highway' ? '#999' : '#666';
-    mmCtx.lineWidth = r.type === 'highway' ? 2 : 1;
-    mmCtx.beginPath();
+    mctx.strokeStyle = r.type === 'dirt' ? '#8B7355' : r.type === 'highway' ? '#999' : '#666';
+    mctx.lineWidth = r.type === 'highway' ? 2 : 1;
+    mctx.beginPath();
     for (let i = 0; i < r.pts.length; i++) {
       const p = r.pts[i];
-      const mx = (p.x + TS/2) * sc;
-      const mz = (p.z + TS/2) * sc;
-      if (i === 0) mmCtx.moveTo(mx, mz);
-      else mmCtx.lineTo(mx, mz);
+      const mx = (p.x + TS/2) * sc, mz = (p.z + TS/2) * sc;
+      i === 0 ? mctx.moveTo(mx, mz) : mctx.lineTo(mx, mz);
     }
-    mmCtx.stroke();
+    mctx.stroke();
   }
 
-  const cx = (cs.pos.x + TS/2) * sc;
-  const cz = (cs.pos.z + TS/2) * sc;
-  mmCtx.fillStyle = '#ff3333';
-  mmCtx.beginPath();
-  mmCtx.arc(cx, cz, 3, 0, Math.PI * 2);
-  mmCtx.fill();
+  const cx = (cs.pos.x + TS/2) * sc, cz = (cs.pos.z + TS/2) * sc;
+  mctx.fillStyle = '#ff3333'; mctx.beginPath(); mctx.arc(cx, cz, 3, 0, Math.PI * 2); mctx.fill();
+  mctx.strokeStyle = '#ff3333'; mctx.lineWidth = 1.5;
+  mctx.beginPath(); mctx.moveTo(cx, cz); mctx.lineTo(cx - cs.fwd.x * 8, cz - cs.fwd.z * 8); mctx.stroke();
 }
 
 // ═══════════════════════════════════════════════════════
-// INPUT
+// INPUT + HUD + LOOP
 // ═══════════════════════════════════════════════════════
 window._keys = {};
 window.addEventListener('keydown', e => { window._keys[e.key.toLowerCase()] = true; });
 window.addEventListener('keyup', e => { window._keys[e.key.toLowerCase()] = false; });
 
-// ═══════════════════════════════════════════════════════
-// HUD
-// ═══════════════════════════════════════════════════════
 const spdEl = document.getElementById('spd');
 const infoEl = document.getElementById('info');
-
-const ROAD_NAMES = { highway: 'HIGHWAY', street: 'CITY STREET', dirt: 'DIRT TRAIL' };
-const ROAD_COLORS = { highway: '#aaffaa', street: '#cccccc', dirt: '#c8a86e' };
+const RN = { highway: 'HIGHWAY', street: 'CITY STREET', dirt: 'DIRT TRAIL' };
+const RC = { highway: '#aaffaa', street: '#cccccc', dirt: '#c8a86e' };
 
 function updateHUD() {
   spdEl.textContent = Math.round(Math.abs(cs.vel * 3.6));
-  if (cs.onRoad) {
-    infoEl.textContent = ROAD_NAMES[cs.onRoad];
-    infoEl.style.color = ROAD_COLORS[cs.onRoad];
-  } else {
-    infoEl.textContent = 'OFF-ROAD';
-    infoEl.style.color = '#ff8888';
-  }
+  if (cs.onRoad) { infoEl.textContent = RN[cs.onRoad]; infoEl.style.color = RC[cs.onRoad]; }
+  else { infoEl.textContent = 'OFF-ROAD'; infoEl.style.color = '#ff8888'; }
 }
 
-// ═══════════════════════════════════════════════════════
-// GAME LOOP
-// ═══════════════════════════════════════════════════════
-let lastTime = performance.now();
-let mmTimer = 0;
-let frameCount = 0;
+let lastTime = performance.now(), mmT = 0, fc = 0;
 
 function animate() {
   requestAnimationFrame(animate);
-
   const now = performance.now();
-  let dt = (now - lastTime) / 1000;
-  lastTime = now;
+  let dt = (now - lastTime) / 1000; lastTime = now;
   dt = Math.min(dt, 0.05);
 
-  updateCar(dt);
-  updateCamera(dt);
-  updateHUD();
+  updateCar(dt); updateCam(dt); updateHUD();
 
-  mmTimer += dt;
-  if (mmTimer > 0.15) {
-    mmTimer = 0;
-    drawMinimap();
-  }
+  mmT += dt;
+  if (mmT > 0.15) { mmT = 0; drawMM(); }
 
   renderer.render(scene, camera);
 
-  // Debug: log first frame
-  frameCount++;
-  if (frameCount === 1) {
-    console.log('First frame rendered. Camera:', camera.position.x, camera.position.y, camera.position.z);
-    console.log('Car at:', cs.pos.x, cs.pos.y, cs.pos.z);
-    console.log('Terrain at origin:', terrainH(0, 0));
-    console.log('Scene children:', scene.children.length);
-  }
+  fc++;
+  if (fc === 1) console.log('Render OK. Cam:', camera.position.x.toFixed(0), camera.position.y.toFixed(0), camera.position.z.toFixed(0), 'Car:', cs.pos.x.toFixed(0), cs.pos.y.toFixed(0), cs.pos.z.toFixed(0), 'TerrainH@0,0:', terrainH(0,0).toFixed(1));
 }
 
 animate();
