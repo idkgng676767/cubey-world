@@ -286,7 +286,7 @@ const car = new THREE.Group();
 {new THREE.Mesh(new THREE.BoxGeometry(1.8,0.8,2.2),new THREE.MeshLambertMaterial({color:0x222233,flatShading:true})).position.set(0,1.3,-0.2);car.add(car.children[car.children.length-1]);}
 
 const wheels=[];
-{wGeo=new THREE.CylinderGeometry(0.4,0.4,0.25,8);wm=new THREE.MeshLambertMaterial({color:0x111111,flatShading:true});for(const[wx,wz] of [[-1.1,1.3],[1.1,1.3],[-1.1,-1.3],[1.1,-1.3]]){const w=new THREE.Mesh(wGeo,wm);w.rotation.z=Math.PI/2;w.position.set(wx,0.1,wz);car.add(w);wheels.push(w);}}
+{const wGeo=new THREE.CylinderGeometry(0.4,0.4,0.25,8);const wm=new THREE.MeshLambertMaterial({color:0x111111,flatShading:true});for(const[wx,wz] of [[-1.1,1.3],[1.1,1.3],[-1.1,-1.3],[1.1,-1.3]]){const w=new THREE.Mesh(wGeo,wm);w.rotation.z=Math.PI/2;w.position.set(wx,0.1,wz);car.add(w);wheels.push(w);}}
 
 const spawnH = terrainH(0,0) + 0.6;
 car.position.set(0, spawnH, 0);
