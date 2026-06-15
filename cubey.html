@@ -211,11 +211,19 @@ function buildDashes(pts, color) {
 }
 
 function genStraight(x1, z1, x2, z2) {
-  return [{x: x1, z: z1}, {x: x2, z: z2}];
+  const dist = Math.sqrt((x2-x1)**2 + (z2-z1)**2);
+  const n = Math.max(2, Math.floor(dist / 8));
+  const pts = [];
+  for (let i = 0; i <= n; i++) {
+    const t = i / n;
+    pts.push({ x: x1 + (x2-x1)*t, z: z1 + (z2-z1)*t });
+  }
+  return pts;
 }
 
 function genCurve(x1, z1, x2, z2, curve) {
-  const n = Math.max(10, Math.floor(Math.sqrt((x2-x1)**2 + (z2-z1)**2) / 25));
+  const dist = Math.sqrt((x2-x1)**2 + (z2-z1)**2);
+  const n = Math.max(20, Math.floor(dist / 8)); // one vertex every 8 units
   const ox = ((x1 * 31 + z2 * 17) % 100 / 100 - 0.5) * curve;
   const oz = ((z1 * 23 + x2 * 37) % 100 / 100 - 0.5) * curve;
   const cx = (x1+x2)/2 + ox;
@@ -233,9 +241,11 @@ function genCurve(x1, z1, x2, z2, curve) {
 }
 
 function genWinding(x1, z1, x2, z2, segments, jitter) {
+  const dist = Math.sqrt((x2-x1)**2 + (z2-z1)**2);
+  const n = Math.max(15, Math.floor(dist / 8)); // one vertex every 8 units
   const pts = [];
-  for (let i = 0; i <= segments; i++) {
-    const t = i / segments;
+  for (let i = 0; i <= n; i++) {
+    const t = i / n;
     const baseX = x1 + (x2-x1)*t;
     const baseZ = z1 + (z2-z1)*t;
     const jx = Math.sin(t * 12.9 + x1 * 0.01) * jitter;
