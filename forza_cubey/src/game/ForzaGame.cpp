@@ -109,6 +109,7 @@ void ForzaGame::update(float dt) {
 }
 
 void ForzaGame::render(RenderEngine* renderer) {
+    renderer->setCamera(*m_camera);  // <-- ADD THIS
     // Set lighting
     DirectionalLight light;
     light.direction = m_sunDir;
@@ -144,6 +145,7 @@ void ForzaGame::onWindowResize(int width, int height) {
 
 void ForzaGame::setupWorld() {
     m_terrain = std::make_unique<Terrain>(5000.0f, 250);
+    m_terrain->init(); 
 }
 
 void ForzaGame::setupCar() {

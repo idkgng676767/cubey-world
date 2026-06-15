@@ -11,6 +11,7 @@ class Camera;
 class Terrain {
 public:
     Terrain(float size, int segments);
+    void init();
     ~Terrain();
     
     void render(RenderEngine& renderer, const Camera& camera) const;

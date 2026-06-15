@@ -9,7 +9,8 @@
 
 namespace fc {
 
-RenderEngine::RenderEngine(int w, int h) : m_width(w), m_height(h) {
+RenderEngine::RenderEngine(int w, int h) 
+    : m_width(w), m_height(h), m_exposure(1.0f), m_ssao(false), m_bloom(false) {
     // G-Buffer: position, normal, albedo, material, depth
     m_gBuffer = std::make_unique<Framebuffer>(w, h, Framebuffer::GBuffer);
     // Shadow map
@@ -136,6 +137,7 @@ void RenderEngine::setLight(const DirectionalLight& light) {
 }
 
 void RenderEngine::renderMesh(const Mesh& mesh, const glm::mat4& model, const Shader& shader) {
+    shader.use();                      // <-- ADD THIS
     shader.setMat4("model", model);
     mesh.bind();
     glDrawElements(GL_TRIANGLES, mesh.getIndexCount(), GL_UNSIGNED_INT, 0);

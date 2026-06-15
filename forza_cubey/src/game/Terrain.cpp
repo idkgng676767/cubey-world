@@ -6,10 +6,13 @@
 namespace fc {
 
 Terrain::Terrain(float size, int segments) : m_size(size), m_segments(segments) {
-    generateTerrain();
 }
 
 Terrain::~Terrain() = default;
+
+void Terrain::init() {
+    generateTerrain();
+}
 
 void Terrain::generateTerrain() {
     std::vector<Vertex> vertices;

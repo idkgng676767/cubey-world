@@ -15,10 +15,11 @@ void GameEngine::initialize(int w, int h, const std::string& title, bool fullscr
     if (!glfwInit()) throw std::runtime_error("GLFW init failed");
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);                    // macOS max
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);              // REQUIRED on macOS
     glfwWindowHint(GLFW_SAMPLES, 4);
-    glfwWindowHint(GLFW_REFRESH_RATE, 144);
+    glfwWindowHint(GLFW_REFRESH_RATE, 144);                        // Optional: remove or keep
 
     GLFWmonitor* monitor = fullscreen ? glfwGetPrimaryMonitor() : nullptr;
     m_window = glfwCreateWindow(w, h, title.c_str(), monitor, nullptr);
@@ -47,11 +48,12 @@ void GameEngine::initialize(int w, int h, const std::string& title, bool fullscr
 
     m_lastFrame = std::chrono::high_resolution_clock::now();
     m_running = true;
+    if (m_game) m_game->initialize(this);
+
 }
 
 void GameEngine::setGame(std::unique_ptr<IGame> game) {
     m_game = std::move(game);
-    m_game->initialize(this);
 }
 
 void GameEngine::run() {

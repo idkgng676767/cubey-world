@@ -20,12 +20,7 @@ events:
     names:
       - "uname"
     candidate_directories:
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
       - "/bin/"
@@ -37,25 +32,21 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     searched_directories:
-      - "/opt/homebrew/opt/openjdk/bin/uname"
-      - "/Users/arjundhillon/.local/bin/uname"
-      - "/opt/homebrew/bin/uname"
-      - "/opt/homebrew/sbin/uname"
       - "/usr/local/bin/uname"
-      - "/usr/local/sbin/uname"
       - "/System/Cryptexes/App/usr/bin/uname"
     found: "/usr/bin/uname"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -67,8 +58,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "message-v1"
     backtrace:
@@ -97,12 +97,7 @@ events:
       - "make"
       - "smake"
     candidate_directories:
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
       - "/bin/"
@@ -114,20 +109,31 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     searched_directories:
-      - "/opt/homebrew/opt/openjdk/bin/gmake"
-      - "/Users/arjundhillon/.local/bin/gmake"
+      - "/usr/local/bin/gmake"
+      - "/System/Cryptexes/App/usr/bin/gmake"
+      - "/usr/bin/gmake"
+      - "/bin/gmake"
+      - "/usr/sbin/gmake"
+      - "/sbin/gmake"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/gmake"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/gmake"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/gmake"
+      - "/pkg/env/global/bin/gmake"
+      - "/Library/Apple/usr/bin/gmake"
+      - "/Applications/VMware Fusion.app/Contents/Public/gmake"
     found: "/opt/homebrew/bin/gmake"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -139,8 +145,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -167,12 +182,7 @@ events:
       - "icx"
       - "clang++"
     candidate_directories:
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
       - "/bin/"
@@ -184,25 +194,21 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     searched_directories:
-      - "/opt/homebrew/opt/openjdk/bin/c++"
-      - "/Users/arjundhillon/.local/bin/c++"
-      - "/opt/homebrew/bin/c++"
-      - "/opt/homebrew/sbin/c++"
       - "/usr/local/bin/c++"
-      - "/usr/local/sbin/c++"
       - "/System/Cryptexes/App/usr/bin/c++"
     found: "/usr/bin/c++"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -214,8 +220,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -243,12 +258,7 @@ events:
     found: "/opt/homebrew/share/cmake/Modules/CMakeCXXCompilerId.cpp.in"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -260,8 +270,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "message-v1"
     backtrace:
@@ -346,12 +365,7 @@ events:
       - "ar"
     candidate_directories:
       - "/usr/bin/"
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
@@ -362,17 +376,18 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     found: "/usr/bin/ar"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -384,8 +399,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -407,12 +431,7 @@ events:
       - "ranlib"
     candidate_directories:
       - "/usr/bin/"
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
@@ -423,17 +442,18 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     found: "/usr/bin/ranlib"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -445,8 +465,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -468,12 +497,7 @@ events:
       - "strip"
     candidate_directories:
       - "/usr/bin/"
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
@@ -484,17 +508,18 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     found: "/usr/bin/strip"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -506,8 +531,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -529,12 +563,7 @@ events:
       - "ld"
     candidate_directories:
       - "/usr/bin/"
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
@@ -545,17 +574,18 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     found: "/usr/bin/ld"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -567,8 +597,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -590,12 +629,7 @@ events:
       - "nm"
     candidate_directories:
       - "/usr/bin/"
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
@@ -606,17 +640,18 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     found: "/usr/bin/nm"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -628,8 +663,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -651,12 +695,7 @@ events:
       - "objdump"
     candidate_directories:
       - "/usr/bin/"
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
@@ -667,17 +706,18 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     found: "/usr/bin/objdump"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -689,8 +729,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -712,12 +761,7 @@ events:
       - "objcopy"
     candidate_directories:
       - "/usr/bin/"
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
@@ -728,16 +772,17 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     searched_directories:
       - "/usr/bin/objcopy"
-      - "/opt/homebrew/opt/openjdk/bin/objcopy"
-      - "/Users/arjundhillon/.local/bin/objcopy"
-      - "/opt/homebrew/bin/objcopy"
-      - "/opt/homebrew/sbin/objcopy"
       - "/usr/local/bin/objcopy"
-      - "/usr/local/sbin/objcopy"
       - "/System/Cryptexes/App/usr/bin/objcopy"
       - "/bin/objcopy"
       - "/usr/sbin/objcopy"
@@ -748,17 +793,18 @@ events:
       - "/pkg/env/global/bin/objcopy"
       - "/Library/Apple/usr/bin/objcopy"
       - "/Applications/VMware Fusion.app/Contents/Public/objcopy"
+      - "/opt/homebrew/bin/objcopy"
+      - "/opt/homebrew/opt/openjdk/bin/objcopy"
+      - "/Users/arjundhillon/.local/bin/objcopy"
+      - "/opt/homebrew/sbin/objcopy"
+      - "/usr/local/sbin/objcopy"
       - "/Users/arjundhillon/.cargo/bin/objcopy"
       - "/Users/arjundhillon/.lmstudio/bin/objcopy"
+      - "/opt/metasploit-framework/bin/objcopy"
     found: false
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -770,8 +816,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -793,12 +848,7 @@ events:
       - "readelf"
     candidate_directories:
       - "/usr/bin/"
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
@@ -809,16 +859,17 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     searched_directories:
       - "/usr/bin/readelf"
-      - "/opt/homebrew/opt/openjdk/bin/readelf"
-      - "/Users/arjundhillon/.local/bin/readelf"
-      - "/opt/homebrew/bin/readelf"
-      - "/opt/homebrew/sbin/readelf"
       - "/usr/local/bin/readelf"
-      - "/usr/local/sbin/readelf"
       - "/System/Cryptexes/App/usr/bin/readelf"
       - "/bin/readelf"
       - "/usr/sbin/readelf"
@@ -829,17 +880,18 @@ events:
       - "/pkg/env/global/bin/readelf"
       - "/Library/Apple/usr/bin/readelf"
       - "/Applications/VMware Fusion.app/Contents/Public/readelf"
+      - "/opt/homebrew/bin/readelf"
+      - "/opt/homebrew/opt/openjdk/bin/readelf"
+      - "/Users/arjundhillon/.local/bin/readelf"
+      - "/opt/homebrew/sbin/readelf"
+      - "/usr/local/sbin/readelf"
       - "/Users/arjundhillon/.cargo/bin/readelf"
       - "/Users/arjundhillon/.lmstudio/bin/readelf"
+      - "/opt/metasploit-framework/bin/readelf"
     found: false
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -851,8 +903,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -874,12 +935,7 @@ events:
       - "dlltool"
     candidate_directories:
       - "/usr/bin/"
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
@@ -890,16 +946,17 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     searched_directories:
       - "/usr/bin/dlltool"
-      - "/opt/homebrew/opt/openjdk/bin/dlltool"
-      - "/Users/arjundhillon/.local/bin/dlltool"
-      - "/opt/homebrew/bin/dlltool"
-      - "/opt/homebrew/sbin/dlltool"
       - "/usr/local/bin/dlltool"
-      - "/usr/local/sbin/dlltool"
       - "/System/Cryptexes/App/usr/bin/dlltool"
       - "/bin/dlltool"
       - "/usr/sbin/dlltool"
@@ -910,17 +967,18 @@ events:
       - "/pkg/env/global/bin/dlltool"
       - "/Library/Apple/usr/bin/dlltool"
       - "/Applications/VMware Fusion.app/Contents/Public/dlltool"
+      - "/opt/homebrew/bin/dlltool"
+      - "/opt/homebrew/opt/openjdk/bin/dlltool"
+      - "/Users/arjundhillon/.local/bin/dlltool"
+      - "/opt/homebrew/sbin/dlltool"
+      - "/usr/local/sbin/dlltool"
       - "/Users/arjundhillon/.cargo/bin/dlltool"
       - "/Users/arjundhillon/.lmstudio/bin/dlltool"
+      - "/opt/metasploit-framework/bin/dlltool"
     found: false
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -932,8 +990,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -955,12 +1022,7 @@ events:
       - "addr2line"
     candidate_directories:
       - "/usr/bin/"
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
@@ -971,16 +1033,17 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     searched_directories:
       - "/usr/bin/addr2line"
-      - "/opt/homebrew/opt/openjdk/bin/addr2line"
-      - "/Users/arjundhillon/.local/bin/addr2line"
-      - "/opt/homebrew/bin/addr2line"
-      - "/opt/homebrew/sbin/addr2line"
       - "/usr/local/bin/addr2line"
-      - "/usr/local/sbin/addr2line"
       - "/System/Cryptexes/App/usr/bin/addr2line"
       - "/bin/addr2line"
       - "/usr/sbin/addr2line"
@@ -991,17 +1054,18 @@ events:
       - "/pkg/env/global/bin/addr2line"
       - "/Library/Apple/usr/bin/addr2line"
       - "/Applications/VMware Fusion.app/Contents/Public/addr2line"
+      - "/opt/homebrew/bin/addr2line"
+      - "/opt/homebrew/opt/openjdk/bin/addr2line"
+      - "/Users/arjundhillon/.local/bin/addr2line"
+      - "/opt/homebrew/sbin/addr2line"
+      - "/usr/local/sbin/addr2line"
       - "/Users/arjundhillon/.cargo/bin/addr2line"
       - "/Users/arjundhillon/.lmstudio/bin/addr2line"
+      - "/opt/metasploit-framework/bin/addr2line"
     found: false
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -1013,8 +1077,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -1036,12 +1109,7 @@ events:
       - "tapi"
     candidate_directories:
       - "/usr/bin/"
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
@@ -1052,16 +1120,17 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     searched_directories:
       - "/usr/bin/tapi"
-      - "/opt/homebrew/opt/openjdk/bin/tapi"
-      - "/Users/arjundhillon/.local/bin/tapi"
-      - "/opt/homebrew/bin/tapi"
-      - "/opt/homebrew/sbin/tapi"
       - "/usr/local/bin/tapi"
-      - "/usr/local/sbin/tapi"
       - "/System/Cryptexes/App/usr/bin/tapi"
       - "/bin/tapi"
       - "/usr/sbin/tapi"
@@ -1072,17 +1141,18 @@ events:
       - "/pkg/env/global/bin/tapi"
       - "/Library/Apple/usr/bin/tapi"
       - "/Applications/VMware Fusion.app/Contents/Public/tapi"
+      - "/opt/homebrew/bin/tapi"
+      - "/opt/homebrew/opt/openjdk/bin/tapi"
+      - "/Users/arjundhillon/.local/bin/tapi"
+      - "/opt/homebrew/sbin/tapi"
+      - "/usr/local/sbin/tapi"
       - "/Users/arjundhillon/.cargo/bin/tapi"
       - "/Users/arjundhillon/.lmstudio/bin/tapi"
+      - "/opt/metasploit-framework/bin/tapi"
     found: false
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -1094,8 +1164,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -1126,12 +1205,7 @@ events:
     found: "/usr/bin/cc"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -1143,8 +1217,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "find-v1"
     backtrace:
@@ -1172,12 +1255,7 @@ events:
     found: "/opt/homebrew/share/cmake/Modules/CMakeCCompilerId.c.in"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -1189,8 +1267,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
   -
     kind: "message-v1"
     backtrace:
@@ -1274,12 +1361,7 @@ events:
     names:
       - "install_name_tool"
     candidate_directories:
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
       - "/bin/"
@@ -1291,25 +1373,21 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
     searched_directories:
-      - "/opt/homebrew/opt/openjdk/bin/install_name_tool"
-      - "/Users/arjundhillon/.local/bin/install_name_tool"
-      - "/opt/homebrew/bin/install_name_tool"
-      - "/opt/homebrew/sbin/install_name_tool"
       - "/usr/local/bin/install_name_tool"
-      - "/usr/local/sbin/install_name_tool"
       - "/System/Cryptexes/App/usr/bin/install_name_tool"
     found: "/usr/bin/install_name_tool"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -1321,8 +1399,17 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
       CMAKE_INSTALL_PREFIX: "/usr/local"
   -
     kind: "try_compile-v1"
@@ -1333,8 +1420,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-t9W2YH"
-      binary: "/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-t9W2YH"
+      source: "/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-BJLGOu"
+      binary: "/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-BJLGOu"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -1348,20 +1435,20 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-t9W2YH'
+        Change Dir: '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-BJLGOu'
         
-        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_622dc/fast
-        /opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_622dc.dir/build.make CMakeFiles/cmTC_622dc.dir/build
-        gmake[1]: Entering directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-t9W2YH'
-        Building CXX object CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o
-        /usr/bin/c++   -arch arm64   -v -Wl,-v -MD -MT CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_c4240/fast
+        /opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_c4240.dir/build.make CMakeFiles/cmTC_c4240.dir/build
+        gmake[1]: Entering directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-BJLGOu'
+        Building CXX object CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/c++   -arch arm64   -v -Wl,-v -MD -MT CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp
         Apple clang version 21.0.0 (clang-2100.1.1.101)
         Target: arm64-apple-darwin27.0.0
         Thread model: posix
         InstalledDir: /Library/Developer/CommandLineTools/usr/bin
         clang++: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
         ignoring nonexistent directory "/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"
-         "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx26.5.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -fno-sized-deallocation -target-sdk-version=26.5 -fvisibility-inlines-hidden-static-local-var -fno-modulemap-allow-subdirectory-search -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -enable-tlsdesc -target-cpu apple-m1 -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +ccpp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +flagm -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-t9W2YH -target-linker-version 1267 -v -fcoverage-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-t9W2YH -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/21 -dependency-file CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/21/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks -Wno-elaborated-enum-base -fdeprecated-macro -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -Wno-error=allocator-wrappers -fdwarf2-cfi-asm -o CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o -x c++ /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+         "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx26.5.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -fno-sized-deallocation -target-sdk-version=26.5 -fvisibility-inlines-hidden-static-local-var -fno-modulemap-allow-subdirectory-search -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -enable-tlsdesc -target-cpu apple-m1 -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +ccpp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +flagm -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-BJLGOu -target-linker-version 1267 -v -fcoverage-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-BJLGOu -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/21 -dependency-file CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/21/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks -Wno-elaborated-enum-base -fdeprecated-macro -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -Wno-error=allocator-wrappers -fdwarf2-cfi-asm -o CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o -x c++ /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp
         clang -cc1 version 21.0.0 (clang-2100.1.1.101) default target arm64-apple-darwin27.0.0
         ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include"
         ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks"
@@ -1375,13 +1462,13 @@ events:
          /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)
          /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks (framework directory)
         End of search list.
-        Linking CXX executable cmTC_622dc
-        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_622dc.dir/link.txt --verbose=1
+        Linking CXX executable cmTC_c4240
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c4240.dir/link.txt --verbose=1
         Apple clang version 21.0.0 (clang-2100.1.1.101)
         Target: arm64-apple-darwin27.0.0
         Thread model: posix
         InstalledDir: /Library/Developer/CommandLineTools/usr/bin
-         "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 26.5.0 26.5 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_622dc -L/usr/local/lib -v CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a
+         "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 26.5.0 26.5 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_c4240 -L/usr/local/lib -v CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a
         @(#)PROGRAM:ld PROJECT:ld-1267
         BUILD 18:30:29 Apr 22 2026
         configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em armv8m.main armv8.1m.main
@@ -1394,8 +1481,8 @@ events:
         	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift
         Framework search paths:
         	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks
-        /usr/bin/c++  -arch arm64  -v -Wl,-v CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_622dc
-        gmake[1]: Leaving directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-t9W2YH'
+        /usr/bin/c++  -arch arm64  -v -Wl,-v CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_c4240
+        gmake[1]: Leaving directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-BJLGOu'
         
       exitCode: 0
   -
@@ -1441,20 +1528,20 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-t9W2YH']
+        ignore line: [Change Dir: '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-BJLGOu']
         ignore line: []
-        ignore line: [Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_622dc/fast]
-        ignore line: [/opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_622dc.dir/build.make CMakeFiles/cmTC_622dc.dir/build]
-        ignore line: [gmake[1]: Entering directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-t9W2YH']
-        ignore line: [Building CXX object CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o]
-        ignore line: [/usr/bin/c++   -arch arm64   -v -Wl -v -MD -MT CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_c4240/fast]
+        ignore line: [/opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_c4240.dir/build.make CMakeFiles/cmTC_c4240.dir/build]
+        ignore line: [gmake[1]: Entering directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-BJLGOu']
+        ignore line: [Building CXX object CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/c++   -arch arm64   -v -Wl -v -MD -MT CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [Apple clang version 21.0.0 (clang-2100.1.1.101)]
         ignore line: [Target: arm64-apple-darwin27.0.0]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
         ignore line: [clang++: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]
         ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"]
-        ignore line: [ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx26.5.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -fno-sized-deallocation -target-sdk-version=26.5 -fvisibility-inlines-hidden-static-local-var -fno-modulemap-allow-subdirectory-search -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -enable-tlsdesc -target-cpu apple-m1 -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +ccpp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +flagm -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-t9W2YH -target-linker-version 1267 -v -fcoverage-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-t9W2YH -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/21 -dependency-file CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/21/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks -Wno-elaborated-enum-base -fdeprecated-macro -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -Wno-error=allocator-wrappers -fdwarf2-cfi-asm -o CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o -x c++ /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx26.5.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -fno-sized-deallocation -target-sdk-version=26.5 -fvisibility-inlines-hidden-static-local-var -fno-modulemap-allow-subdirectory-search -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -enable-tlsdesc -target-cpu apple-m1 -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +ccpp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +flagm -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-BJLGOu -target-linker-version 1267 -v -fcoverage-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-BJLGOu -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/21 -dependency-file CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/21/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks -Wno-elaborated-enum-base -fdeprecated-macro -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -Wno-error=allocator-wrappers -fdwarf2-cfi-asm -o CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o -x c++ /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [clang -cc1 version 21.0.0 (clang-2100.1.1.101) default target arm64-apple-darwin27.0.0]
         ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include"]
         ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks"]
@@ -1468,13 +1555,13 @@ events:
         ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)]
         ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks (framework directory)]
         ignore line: [End of search list.]
-        ignore line: [Linking CXX executable cmTC_622dc]
-        ignore line: [/opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_622dc.dir/link.txt --verbose=1]
+        ignore line: [Linking CXX executable cmTC_c4240]
+        ignore line: [/opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c4240.dir/link.txt --verbose=1]
         ignore line: [Apple clang version 21.0.0 (clang-2100.1.1.101)]
         ignore line: [Target: arm64-apple-darwin27.0.0]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
-        link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 26.5.0 26.5 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_622dc -L/usr/local/lib -v CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a]
+        link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 26.5.0 26.5 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_c4240 -L/usr/local/lib -v CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a]
           arg [/Library/Developer/CommandLineTools/usr/bin/ld] ==> ignore
           arg [-demangle] ==> ignore
           arg [-lto_library] ==> ignore, skip following value
@@ -1491,10 +1578,10 @@ events:
           arg [-mllvm] ==> ignore
           arg [-enable-linkonceodr-outlining] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_622dc] ==> ignore
+          arg [cmTC_c4240] ==> ignore
           arg [-L/usr/local/lib] ==> dir [/usr/local/lib]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_622dc.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [CMakeFiles/cmTC_c4240.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
           arg [-lc++] ==> lib [c++]
           arg [-lSystem] ==> lib [System]
           arg [/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a] ==> lib [/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a]
@@ -1538,8 +1625,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-09riMw"
-      binary: "/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-09riMw"
+      source: "/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-nRcK3t"
+      binary: "/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-nRcK3t"
     cmakeVariables:
       CMAKE_CXX_STDLIB_MODULES_JSON: ""
       CMAKE_C_FLAGS: ""
@@ -1552,19 +1639,19 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-09riMw'
+        Change Dir: '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-nRcK3t'
         
-        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_4daa3/fast
-        /opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_4daa3.dir/build.make CMakeFiles/cmTC_4daa3.dir/build
-        gmake[1]: Entering directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-09riMw'
-        Building C object CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o
-        /usr/bin/cc   -arch arm64   -v -Wl,-v -MD -MT CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o -c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_d1a6e/fast
+        /opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_d1a6e.dir/build.make CMakeFiles/cmTC_d1a6e.dir/build
+        gmake[1]: Entering directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-nRcK3t'
+        Building C object CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o
+        /usr/bin/cc   -arch arm64   -v -Wl,-v -MD -MT CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o -c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c
         Apple clang version 21.0.0 (clang-2100.1.1.101)
         Target: arm64-apple-darwin27.0.0
         Thread model: posix
         InstalledDir: /Library/Developer/CommandLineTools/usr/bin
         clang: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
-         "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx26.5.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -fno-sized-deallocation -target-sdk-version=26.5 -fvisibility-inlines-hidden-static-local-var -fno-modulemap-allow-subdirectory-search -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -enable-tlsdesc -target-cpu apple-m1 -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +ccpp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +flagm -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-09riMw -target-linker-version 1267 -v -fcoverage-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-09riMw -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/21 -dependency-file CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/21/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks -Wno-elaborated-enum-base -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -Wno-error=allocator-wrappers -fdwarf2-cfi-asm -o CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o -x c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c
+         "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx26.5.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -fno-sized-deallocation -target-sdk-version=26.5 -fvisibility-inlines-hidden-static-local-var -fno-modulemap-allow-subdirectory-search -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -enable-tlsdesc -target-cpu apple-m1 -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +ccpp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +flagm -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-nRcK3t -target-linker-version 1267 -v -fcoverage-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-nRcK3t -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/21 -dependency-file CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/21/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks -Wno-elaborated-enum-base -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -Wno-error=allocator-wrappers -fdwarf2-cfi-asm -o CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o -x c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c
         clang -cc1 version 21.0.0 (clang-2100.1.1.101) default target arm64-apple-darwin27.0.0
         ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include"
         ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks"
@@ -1577,13 +1664,13 @@ events:
          /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)
          /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks (framework directory)
         End of search list.
-        Linking C executable cmTC_4daa3
-        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4daa3.dir/link.txt --verbose=1
+        Linking C executable cmTC_d1a6e
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d1a6e.dir/link.txt --verbose=1
         Apple clang version 21.0.0 (clang-2100.1.1.101)
         Target: arm64-apple-darwin27.0.0
         Thread model: posix
         InstalledDir: /Library/Developer/CommandLineTools/usr/bin
-         "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 26.5.0 26.5 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_4daa3 -L/usr/local/lib -v CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a
+         "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 26.5.0 26.5 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_d1a6e -L/usr/local/lib -v CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a
         @(#)PROGRAM:ld PROJECT:ld-1267
         BUILD 18:30:29 Apr 22 2026
         configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em armv8m.main armv8.1m.main
@@ -1596,8 +1683,8 @@ events:
         	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift
         Framework search paths:
         	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks
-        /usr/bin/cc  -arch arm64  -v -Wl,-v CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o -o cmTC_4daa3
-        gmake[1]: Leaving directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-09riMw'
+        /usr/bin/cc  -arch arm64  -v -Wl,-v CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o -o cmTC_d1a6e
+        gmake[1]: Leaving directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-nRcK3t'
         
       exitCode: 0
   -
@@ -1641,19 +1728,19 @@ events:
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-09riMw']
+        ignore line: [Change Dir: '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-nRcK3t']
         ignore line: []
-        ignore line: [Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_4daa3/fast]
-        ignore line: [/opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_4daa3.dir/build.make CMakeFiles/cmTC_4daa3.dir/build]
-        ignore line: [gmake[1]: Entering directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-09riMw']
-        ignore line: [Building C object CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o]
-        ignore line: [/usr/bin/cc   -arch arm64   -v -Wl -v -MD -MT CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o -c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_d1a6e/fast]
+        ignore line: [/opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_d1a6e.dir/build.make CMakeFiles/cmTC_d1a6e.dir/build]
+        ignore line: [gmake[1]: Entering directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-nRcK3t']
+        ignore line: [Building C object CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/bin/cc   -arch arm64   -v -Wl -v -MD -MT CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o -c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c]
         ignore line: [Apple clang version 21.0.0 (clang-2100.1.1.101)]
         ignore line: [Target: arm64-apple-darwin27.0.0]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
         ignore line: [clang: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]
-        ignore line: [ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx26.5.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -fno-sized-deallocation -target-sdk-version=26.5 -fvisibility-inlines-hidden-static-local-var -fno-modulemap-allow-subdirectory-search -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -enable-tlsdesc -target-cpu apple-m1 -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +ccpp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +flagm -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-09riMw -target-linker-version 1267 -v -fcoverage-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-09riMw -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/21 -dependency-file CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/21/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks -Wno-elaborated-enum-base -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -Wno-error=allocator-wrappers -fdwarf2-cfi-asm -o CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o -x c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx26.5.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -fno-sized-deallocation -target-sdk-version=26.5 -fvisibility-inlines-hidden-static-local-var -fno-modulemap-allow-subdirectory-search -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -enable-tlsdesc -target-cpu apple-m1 -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +ccpp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +flagm -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-nRcK3t -target-linker-version 1267 -v -fcoverage-compilation-dir=/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-nRcK3t -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/21 -dependency-file CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/21/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks -Wno-elaborated-enum-base -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -Wno-error=allocator-wrappers -fdwarf2-cfi-asm -o CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o -x c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c]
         ignore line: [clang -cc1 version 21.0.0 (clang-2100.1.1.101) default target arm64-apple-darwin27.0.0]
         ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include"]
         ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks"]
@@ -1666,13 +1753,13 @@ events:
         ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)]
         ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks (framework directory)]
         ignore line: [End of search list.]
-        ignore line: [Linking C executable cmTC_4daa3]
-        ignore line: [/opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4daa3.dir/link.txt --verbose=1]
+        ignore line: [Linking C executable cmTC_d1a6e]
+        ignore line: [/opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d1a6e.dir/link.txt --verbose=1]
         ignore line: [Apple clang version 21.0.0 (clang-2100.1.1.101)]
         ignore line: [Target: arm64-apple-darwin27.0.0]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
-        link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 26.5.0 26.5 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_4daa3 -L/usr/local/lib -v CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a]
+        link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 26.5.0 26.5 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_d1a6e -L/usr/local/lib -v CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a]
           arg [/Library/Developer/CommandLineTools/usr/bin/ld] ==> ignore
           arg [-demangle] ==> ignore
           arg [-lto_library] ==> ignore, skip following value
@@ -1689,10 +1776,10 @@ events:
           arg [-mllvm] ==> ignore
           arg [-enable-linkonceodr-outlining] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_4daa3] ==> ignore
+          arg [cmTC_d1a6e] ==> ignore
           arg [-L/usr/local/lib] ==> dir [/usr/local/lib]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_4daa3.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [CMakeFiles/cmTC_d1a6e.dir/CMakeCCompilerABI.c.o] ==> ignore
           arg [-lSystem] ==> lib [System]
           arg [/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a] ==> lib [/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a]
         linker tool for 'C': /Library/Developer/CommandLineTools/usr/bin/ld
@@ -1746,26 +1833,27 @@ events:
       - "OpenGL"
       - "GL"
     candidate_directories:
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
       - "/sbin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
+      - "/opt/metasploit-framework/bin/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/"
-      - "/opt/homebrew/lib/"
-      - "/opt/homebrew/"
       - "/usr/local/lib/"
       - "/usr/local/"
       - "/usr/lib/"
       - "/usr/"
+      - "/opt/homebrew/lib/"
+      - "/opt/homebrew/"
       - "/opt/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/"
       - "/Library/Developer/CommandLineTools/Library/Frameworks/"
@@ -1774,12 +1862,7 @@ events:
     found: "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -1791,12 +1874,21 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
       CMAKE_INSTALL_PREFIX: "/usr/local"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
-        - "/opt/homebrew"
+        - "/usr/local"
         - "/usr/local"
         - "/usr"
         - "/"
@@ -1839,26 +1931,27 @@ events:
       - "OpenGL"
       - "GLU"
     candidate_directories:
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
       - "/sbin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
+      - "/opt/metasploit-framework/bin/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/"
-      - "/opt/homebrew/lib/"
-      - "/opt/homebrew/"
       - "/usr/local/lib/"
       - "/usr/local/"
       - "/usr/lib/"
       - "/usr/"
+      - "/opt/homebrew/lib/"
+      - "/opt/homebrew/"
       - "/opt/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/"
       - "/Library/Developer/CommandLineTools/Library/Frameworks/"
@@ -1867,12 +1960,7 @@ events:
     found: "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -1884,12 +1972,21 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
       CMAKE_INSTALL_PREFIX: "/usr/local"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
-        - "/opt/homebrew"
+        - "/usr/local"
         - "/usr/local"
         - "/usr"
         - "/"
@@ -1932,12 +2029,7 @@ events:
       - "OpenGL/gl.h"
       - "GL/gl.h"
     candidate_directories:
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
       - "/bin/"
@@ -1949,17 +2041,23 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/"
-      - "/opt/homebrew/include/"
-      - "/opt/homebrew/"
       - "/usr/local/include/"
       - "/usr/local/"
       - "/usr/include/"
       - "/usr/"
       - "/include/"
+      - "/opt/homebrew/include/"
+      - "/opt/homebrew/"
       - "/usr/X11R6/include/"
       - "/usr/X11R6/"
       - "/usr/pkg/include/"
@@ -1980,12 +2078,7 @@ events:
       - "/Network/Library/Frameworks/"
       - "/System/Library/Frameworks/"
     searched_directories:
-      - "/opt/homebrew/opt/openjdk/bin/OpenGL.framework/Headers/gl.h"
-      - "/Users/arjundhillon/.local/bin/OpenGL.framework/Headers/gl.h"
-      - "/opt/homebrew/bin/OpenGL.framework/Headers/gl.h"
-      - "/opt/homebrew/sbin/OpenGL.framework/Headers/gl.h"
       - "/usr/local/bin/OpenGL.framework/Headers/gl.h"
-      - "/usr/local/sbin/OpenGL.framework/Headers/gl.h"
       - "/System/Cryptexes/App/usr/bin/OpenGL.framework/Headers/gl.h"
       - "/usr/bin/OpenGL.framework/Headers/gl.h"
       - "/bin/OpenGL.framework/Headers/gl.h"
@@ -1997,17 +2090,23 @@ events:
       - "/pkg/env/global/bin/OpenGL.framework/Headers/gl.h"
       - "/Library/Apple/usr/bin/OpenGL.framework/Headers/gl.h"
       - "/Applications/VMware Fusion.app/Contents/Public/OpenGL.framework/Headers/gl.h"
+      - "/opt/homebrew/bin/OpenGL.framework/Headers/gl.h"
+      - "/opt/homebrew/opt/openjdk/bin/OpenGL.framework/Headers/gl.h"
+      - "/Users/arjundhillon/.local/bin/OpenGL.framework/Headers/gl.h"
+      - "/opt/homebrew/sbin/OpenGL.framework/Headers/gl.h"
+      - "/usr/local/sbin/OpenGL.framework/Headers/gl.h"
       - "/Users/arjundhillon/.cargo/bin/OpenGL.framework/Headers/gl.h"
       - "/Users/arjundhillon/.lmstudio/bin/OpenGL.framework/Headers/gl.h"
+      - "/opt/metasploit-framework/bin/OpenGL.framework/Headers/gl.h"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/OpenGL.framework/Headers/gl.h"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/OpenGL.framework/Headers/gl.h"
-      - "/opt/homebrew/include/OpenGL.framework/Headers/gl.h"
-      - "/opt/homebrew/OpenGL.framework/Headers/gl.h"
       - "/usr/local/include/OpenGL.framework/Headers/gl.h"
       - "/usr/local/OpenGL.framework/Headers/gl.h"
       - "/usr/include/OpenGL.framework/Headers/gl.h"
       - "/usr/OpenGL.framework/Headers/gl.h"
       - "/include/OpenGL.framework/Headers/gl.h"
+      - "/opt/homebrew/include/OpenGL.framework/Headers/gl.h"
+      - "/opt/homebrew/OpenGL.framework/Headers/gl.h"
       - "/usr/X11R6/include/OpenGL.framework/Headers/gl.h"
       - "/usr/X11R6/OpenGL.framework/Headers/gl.h"
       - "/usr/pkg/include/OpenGL.framework/Headers/gl.h"
@@ -2025,12 +2124,7 @@ events:
     found: "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -2042,12 +2136,21 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
       CMAKE_INSTALL_PREFIX: "/usr/local"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
-        - "/opt/homebrew"
+        - "/usr/local"
         - "/usr/local"
         - "/usr"
         - "/"
@@ -2090,12 +2193,7 @@ events:
       - "OpenGL/glu.h"
       - "GL/glu.h"
     candidate_directories:
-      - "/opt/homebrew/opt/openjdk/bin/"
-      - "/Users/arjundhillon/.local/bin/"
-      - "/opt/homebrew/bin/"
-      - "/opt/homebrew/sbin/"
       - "/usr/local/bin/"
-      - "/usr/local/sbin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
       - "/bin/"
@@ -2107,17 +2205,23 @@ events:
       - "/pkg/env/global/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Applications/VMware Fusion.app/Contents/Public/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/opt/openjdk/bin/"
+      - "/Users/arjundhillon/.local/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/usr/local/sbin/"
       - "/Users/arjundhillon/.cargo/bin/"
       - "/Users/arjundhillon/.lmstudio/bin/"
+      - "/opt/metasploit-framework/bin/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/"
-      - "/opt/homebrew/include/"
-      - "/opt/homebrew/"
       - "/usr/local/include/"
       - "/usr/local/"
       - "/usr/include/"
       - "/usr/"
       - "/include/"
+      - "/opt/homebrew/include/"
+      - "/opt/homebrew/"
       - "/usr/X11R6/include/"
       - "/usr/X11R6/"
       - "/usr/pkg/include/"
@@ -2138,12 +2242,7 @@ events:
       - "/Network/Library/Frameworks/"
       - "/System/Library/Frameworks/"
     searched_directories:
-      - "/opt/homebrew/opt/openjdk/bin/OpenGL.framework/Headers/glu.h"
-      - "/Users/arjundhillon/.local/bin/OpenGL.framework/Headers/glu.h"
-      - "/opt/homebrew/bin/OpenGL.framework/Headers/glu.h"
-      - "/opt/homebrew/sbin/OpenGL.framework/Headers/glu.h"
       - "/usr/local/bin/OpenGL.framework/Headers/glu.h"
-      - "/usr/local/sbin/OpenGL.framework/Headers/glu.h"
       - "/System/Cryptexes/App/usr/bin/OpenGL.framework/Headers/glu.h"
       - "/usr/bin/OpenGL.framework/Headers/glu.h"
       - "/bin/OpenGL.framework/Headers/glu.h"
@@ -2155,17 +2254,23 @@ events:
       - "/pkg/env/global/bin/OpenGL.framework/Headers/glu.h"
       - "/Library/Apple/usr/bin/OpenGL.framework/Headers/glu.h"
       - "/Applications/VMware Fusion.app/Contents/Public/OpenGL.framework/Headers/glu.h"
+      - "/opt/homebrew/bin/OpenGL.framework/Headers/glu.h"
+      - "/opt/homebrew/opt/openjdk/bin/OpenGL.framework/Headers/glu.h"
+      - "/Users/arjundhillon/.local/bin/OpenGL.framework/Headers/glu.h"
+      - "/opt/homebrew/sbin/OpenGL.framework/Headers/glu.h"
+      - "/usr/local/sbin/OpenGL.framework/Headers/glu.h"
       - "/Users/arjundhillon/.cargo/bin/OpenGL.framework/Headers/glu.h"
       - "/Users/arjundhillon/.lmstudio/bin/OpenGL.framework/Headers/glu.h"
+      - "/opt/metasploit-framework/bin/OpenGL.framework/Headers/glu.h"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/OpenGL.framework/Headers/glu.h"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/OpenGL.framework/Headers/glu.h"
-      - "/opt/homebrew/include/OpenGL.framework/Headers/glu.h"
-      - "/opt/homebrew/OpenGL.framework/Headers/glu.h"
       - "/usr/local/include/OpenGL.framework/Headers/glu.h"
       - "/usr/local/OpenGL.framework/Headers/glu.h"
       - "/usr/include/OpenGL.framework/Headers/glu.h"
       - "/usr/OpenGL.framework/Headers/glu.h"
       - "/include/OpenGL.framework/Headers/glu.h"
+      - "/opt/homebrew/include/OpenGL.framework/Headers/glu.h"
+      - "/opt/homebrew/OpenGL.framework/Headers/glu.h"
       - "/usr/X11R6/include/OpenGL.framework/Headers/glu.h"
       - "/usr/X11R6/OpenGL.framework/Headers/glu.h"
       - "/usr/pkg/include/OpenGL.framework/Headers/glu.h"
@@ -2183,12 +2288,7 @@ events:
     found: "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -2200,12 +2300,21 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
       CMAKE_INSTALL_PREFIX: "/usr/local"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
-        - "/opt/homebrew"
+        - "/usr/local"
         - "/usr/local"
         - "/usr"
         - "/"
@@ -2242,8 +2351,8 @@ events:
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-q42fkJ"
-      binary: "/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-q42fkJ"
+      source: "/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-dIWIs2"
+      binary: "/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-dIWIs2"
     cmakeVariables:
       CMAKE_CXX_STDLIB_MODULES_JSON: ""
       CMAKE_C_FLAGS: ""
@@ -2256,17 +2365,17 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-q42fkJ'
+        Change Dir: '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-dIWIs2'
         
-        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_ed278/fast
-        /opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_ed278.dir/build.make CMakeFiles/cmTC_ed278.dir/build
-        gmake[1]: Entering directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-q42fkJ'
-        Building C object CMakeFiles/cmTC_ed278.dir/src.c.o
-        /usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD  -std=gnu11 -arch arm64 -MD -MT CMakeFiles/cmTC_ed278.dir/src.c.o -MF CMakeFiles/cmTC_ed278.dir/src.c.o.d -o CMakeFiles/cmTC_ed278.dir/src.c.o -c /Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-q42fkJ/src.c
-        Linking C executable cmTC_ed278
-        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ed278.dir/link.txt --verbose=1
-        /usr/bin/cc  -arch arm64 CMakeFiles/cmTC_ed278.dir/src.c.o -o cmTC_ed278
-        gmake[1]: Leaving directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-q42fkJ'
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_51a81/fast
+        /opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_51a81.dir/build.make CMakeFiles/cmTC_51a81.dir/build
+        gmake[1]: Entering directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-dIWIs2'
+        Building C object CMakeFiles/cmTC_51a81.dir/src.c.o
+        /usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD  -std=gnu11 -arch arm64 -MD -MT CMakeFiles/cmTC_51a81.dir/src.c.o -MF CMakeFiles/cmTC_51a81.dir/src.c.o.d -o CMakeFiles/cmTC_51a81.dir/src.c.o -c /Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-dIWIs2/src.c
+        Linking C executable cmTC_51a81
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_51a81.dir/link.txt --verbose=1
+        /usr/bin/cc  -arch arm64 CMakeFiles/cmTC_51a81.dir/src.c.o -o cmTC_51a81
+        gmake[1]: Leaving directory '/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/CMakeScratch/TryCompile-dIWIs2'
         
       exitCode: 0
   -
@@ -2330,43 +2439,123 @@ events:
         mode: "cps"
         reason: "no_exist"
       -
-        path: "/opt/homebrew/opt/openjdk/glfw3Config.cmake"
+        path: "/usr/local/glfw3Config.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "/opt/homebrew/opt/openjdk/glfw3-config.cmake"
+        path: "/usr/local/glfw3-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "/opt/homebrew/opt/openjdk/lib64/cps/glfw3.cps"
+        path: "/usr/local/lib64/cps/glfw3.cps"
         mode: "cps"
         reason: "no_exist"
       -
-        path: "/opt/homebrew/opt/openjdk/lib/cps/glfw3.cps"
+        path: "/usr/local/lib/cps/glfw3.cps"
         mode: "cps"
         reason: "no_exist"
       -
-        path: "/opt/homebrew/opt/openjdk/share/cps/glfw3.cps"
+        path: "/usr/local/share/cps/glfw3.cps"
         mode: "cps"
         reason: "no_exist"
       -
-        path: "/Users/arjundhillon/.local/glfw3Config.cmake"
+        path: "/System/Cryptexes/App/usr/glfw3Config.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "/Users/arjundhillon/.local/glfw3-config.cmake"
+        path: "/System/Cryptexes/App/usr/glfw3-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "/Users/arjundhillon/.local/lib64/cps/glfw3.cps"
+        path: "/System/Cryptexes/App/usr/lib64/cps/glfw3.cps"
         mode: "cps"
         reason: "no_exist"
       -
-        path: "/Users/arjundhillon/.local/lib/cps/glfw3.cps"
+        path: "/System/Cryptexes/App/usr/lib/cps/glfw3.cps"
         mode: "cps"
         reason: "no_exist"
       -
-        path: "/Users/arjundhillon/.local/share/cps/glfw3.cps"
+        path: "/System/Cryptexes/App/usr/share/cps/glfw3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/glfw3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/glfw3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib64/cps/glfw3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/glfw3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/glfw3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/glfw3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/glfw3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/lib64/cps/glfw3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/lib/cps/glfw3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/share/cps/glfw3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/pkg/env/global/glfw3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/pkg/env/global/glfw3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/pkg/env/global/lib64/cps/glfw3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/pkg/env/global/lib/cps/glfw3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/pkg/env/global/share/cps/glfw3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/Library/Apple/usr/glfw3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/Library/Apple/usr/glfw3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/Library/Apple/usr/lib64/cps/glfw3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/Library/Apple/usr/lib/cps/glfw3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/Library/Apple/usr/share/cps/glfw3.cps"
         mode: "cps"
         reason: "no_exist"
       -
@@ -2395,12 +2584,7 @@ events:
       version: "3.4.0"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -2412,12 +2596,21 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
       CMAKE_INSTALL_PREFIX: "/usr/local"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
-        - "/opt/homebrew"
+        - "/usr/local"
         - "/usr/local"
         - "/usr"
         - "/"
@@ -2497,43 +2690,123 @@ events:
         mode: "cps"
         reason: "no_exist"
       -
-        path: "/opt/homebrew/opt/openjdk/glmConfig.cmake"
+        path: "/usr/local/glmConfig.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "/opt/homebrew/opt/openjdk/glm-config.cmake"
+        path: "/usr/local/glm-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "/opt/homebrew/opt/openjdk/lib64/cps/glm.cps"
+        path: "/usr/local/lib64/cps/glm.cps"
         mode: "cps"
         reason: "no_exist"
       -
-        path: "/opt/homebrew/opt/openjdk/lib/cps/glm.cps"
+        path: "/usr/local/lib/cps/glm.cps"
         mode: "cps"
         reason: "no_exist"
       -
-        path: "/opt/homebrew/opt/openjdk/share/cps/glm.cps"
+        path: "/usr/local/share/cps/glm.cps"
         mode: "cps"
         reason: "no_exist"
       -
-        path: "/Users/arjundhillon/.local/glmConfig.cmake"
+        path: "/System/Cryptexes/App/usr/glmConfig.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "/Users/arjundhillon/.local/glm-config.cmake"
+        path: "/System/Cryptexes/App/usr/glm-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "/Users/arjundhillon/.local/lib64/cps/glm.cps"
+        path: "/System/Cryptexes/App/usr/lib64/cps/glm.cps"
         mode: "cps"
         reason: "no_exist"
       -
-        path: "/Users/arjundhillon/.local/lib/cps/glm.cps"
+        path: "/System/Cryptexes/App/usr/lib/cps/glm.cps"
         mode: "cps"
         reason: "no_exist"
       -
-        path: "/Users/arjundhillon/.local/share/cps/glm.cps"
+        path: "/System/Cryptexes/App/usr/share/cps/glm.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/glmConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/glm-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib64/cps/glm.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/glm.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/glm.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/glmConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/glm-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/lib64/cps/glm.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/lib/cps/glm.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/share/cps/glm.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/pkg/env/global/glmConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/pkg/env/global/glm-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/pkg/env/global/lib64/cps/glm.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/pkg/env/global/lib/cps/glm.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/pkg/env/global/share/cps/glm.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/Library/Apple/usr/glmConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/Library/Apple/usr/glm-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/Library/Apple/usr/lib64/cps/glm.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/Library/Apple/usr/lib/cps/glm.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/Library/Apple/usr/share/cps/glm.cps"
         mode: "cps"
         reason: "no_exist"
       -
@@ -2562,12 +2835,7 @@ events:
       version: "1.0.3"
     search_context:
       ENV{PATH}:
-        - "/opt/homebrew/opt/openjdk/bin"
-        - "/Users/arjundhillon/.local/bin"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew/sbin"
         - "/usr/local/bin"
-        - "/usr/local/sbin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
         - "/bin"
@@ -2579,12 +2847,21 @@ events:
         - "/pkg/env/global/bin"
         - "/Library/Apple/usr/bin"
         - "/Applications/VMware Fusion.app/Contents/Public"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/opt/openjdk/bin"
+        - "/Users/arjundhillon/.local/bin"
+        - "/opt/homebrew/sbin"
+        - "/usr/local/sbin"
         - "/Users/arjundhillon/.cargo/bin"
         - "/Users/arjundhillon/.lmstudio/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
+        - "/opt/metasploit-framework/bin"
       CMAKE_INSTALL_PREFIX: "/usr/local"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
-        - "/opt/homebrew"
+        - "/usr/local"
         - "/usr/local"
         - "/usr"
         - "/"
