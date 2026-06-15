@@ -76,6 +76,7 @@ function fbm(x, y) {
 // ═══ TERRAIN ═══
 const TS = 5000, TSEG = 250;
 const FUJI_X = 800, FUJI_Z = -600, FUJI_R = 500, FUJI_H = 180;
+const villages = [{x:-1400,z:-1000},{x:1600,z:700},{z:1700,x:-700},{x:1900,z:-1500},{x:-1700,z:1300}];
 
 function terrainH(x, z) {
   let h = fbm(x * 0.0008, z * 0.0008) * 20 + 8;
@@ -243,7 +244,6 @@ addRoad(mkCurve(-CR,-CR,CR,CR,50),10,'highway');
 addRoad(mkCurve(-CR,CR,CR,-CR,50),10,'highway');
 for(const r of [CR, CR+250, CR+600]){const pts=[];for(let a=0;a<Math.PI*2;a+=0.06)pts.push({x:Math.cos(a)*r,z:Math.sin(a)*r});addRoad(pts,r>=CR+300?8:10,'highway');}
 
-const villages = [{x:-1400,z:-1000},{x:1600,z:700},{z:1700,x:-700},{x:1900,z:-1500},{x:-1700,z:1300}];
 for(const v of villages){const a=Math.atan2(v.z,v.x);addRoad(mkCurve(Math.cos(a)*(CR+600),Math.sin(a)*(CR+600),v.x,v.z,150),8,'highway');}
 const sv=[...villages].sort((a,b)=>Math.atan2(a.z,a.x)-Math.atan2(b.z,b.x));
 for(let i=0;i<sv.length;i++){const a=sv[i],b=sv[(i+1)%sv.length];addRoad(mkCurve(a.x,a.z,b.x,b.z,200),6,'highway');}
