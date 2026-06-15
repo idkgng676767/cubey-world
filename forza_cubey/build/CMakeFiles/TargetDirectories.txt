@@ -1,0 +1,8 @@
+/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/glad.dir
+/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/forza_cubey.dir
+/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/edit_cache.dir
+/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/rebuild_cache.dir
+/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/list_install_components.dir
+/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/install.dir
+/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/install/local.dir
+/Users/arjundhillon/cubey-world/forza_cubey/build/CMakeFiles/install/strip.dir

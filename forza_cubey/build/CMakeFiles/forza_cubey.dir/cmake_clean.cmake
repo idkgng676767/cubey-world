@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/forza_cubey.dir/src/audio/AudioEngine.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/audio/AudioEngine.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/engine/GameEngine.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/engine/GameEngine.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/game/BuildingGenerator.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/game/BuildingGenerator.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/game/Car.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/game/Car.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/game/ForzaGame.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/game/ForzaGame.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/game/ParticleSystem.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/game/ParticleSystem.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/game/RoadNetwork.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/game/RoadNetwork.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/game/Skybox.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/game/Skybox.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/game/Terrain.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/game/Terrain.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/main.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/main.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/physics/PhysicsEngine.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/physics/PhysicsEngine.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/renderer/Camera.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/renderer/Camera.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/renderer/Framebuffer.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/renderer/Framebuffer.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/renderer/Mesh.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/renderer/Mesh.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/renderer/RenderEngine.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/renderer/RenderEngine.cpp.o.d"
+  "CMakeFiles/forza_cubey.dir/src/renderer/Shader.cpp.o"
+  "CMakeFiles/forza_cubey.dir/src/renderer/Shader.cpp.o.d"
+  "forza_cubey"
+  "forza_cubey.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/forza_cubey.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
